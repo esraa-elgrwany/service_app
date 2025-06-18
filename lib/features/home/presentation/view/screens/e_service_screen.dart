@@ -24,21 +24,16 @@ class ServiceScreen extends StatelessWidget{
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            InkWell(
+            ServiceCard(
+              title: 'Add New Service',
+              subtitle: 'Create and manage new services',
+              icon: Icons.add_box_rounded,
+              color:Colors.teal,
               onTap: () {
-               // Navigator.push(context,MaterialPageRoute(builder:  (context) => AddServiceScreen(),));
+                Navigator.pushNamed(context, 'addServiceScreen');
               },
-              child: ServiceCard(
-                title: 'Add New Service',
-                subtitle: 'Create and manage new services',
-                icon: Icons.add_box_rounded,
-                color:Colors.teal,
-                onTap: () {
-                  Navigator.pushNamed(context, 'addServiceScreen');
-                },
-              ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 24.h),
             ServiceCard(
               title: 'All Services',
               subtitle: 'View, edit, or delete services',

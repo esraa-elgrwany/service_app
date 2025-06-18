@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/home/presentation/view/widgets/home_card_item.dart';
 import 'package:service_app/features/setting/view/setting_screen.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget{
   static const String routeName="homeScreen";

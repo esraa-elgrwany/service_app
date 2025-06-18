@@ -36,24 +36,16 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failures, dynamic>> verifyOtp(
+  Future<Either<Failures,VerifyOtpSuccessModel>> verifyOtp(
       {required String phone,required String otp}) async {
     try {
       final response = await apiManager.postData(
         EndPoints.verifyOtp,
         body: {"phone": phone, "otp": otp},
       );
-      final result = response.data['result'];
-
-      if (result['success'] == true && result['action'] == 'login') {
-        return Right(VerifyOtpSuccessModel.fromJson(response.data));
-      } else if (result['success'] == false && result['action'] == 'signup_required') {
-        return Right(VerifyOtpSignupModel.fromJson(response.data));
-      } else if (result['success'] == false && result['error'] != null) {
-        return Right(VerifyOtpErrorModel.fromJson(response.data));
-      } else {
-        return left(ServerFailure('Unexpected response format'));
-      }
+      VerifyOtpSuccessModel model = VerifyOtpSuccessModel.fromJson(response.data);
+      print("Response Data: ${response.data}");
+      return Right(model);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure(e.message ?? "Failed to send OTP"));
@@ -64,7 +56,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failures,dynamic>>? register({required String phone, required String name, required String id,
+  Future<Either<Failures,SignUpSuccessModel>>? register({required String phone, required String name, required String id,
     required String expiryDate, required String address}) async{
     try {
       final response = await apiManager.postData(
@@ -76,15 +68,9 @@ class AuthRepoImpl implements AuthRepo {
           "address": address
         },
       );
-      final data = response.data;
-     print("++++++signup data$data");
-      if (data['result'] != null && data['result']['success'] == true) {
-        return Right(SignUpSuccessModel.fromJson(data));
-      } else if (data['result'] != null && data['result']['success'] == false && data['result']['error'] != null) {
-        return Right(SignUpErrorModel.fromJson(data));
-      } else {
-        return Left(ServerFailure("Unexpected response format"));
-      }
+      SignUpSuccessModel model =SignUpSuccessModel.fromJson(response.data);
+      print("Response Data: ${response.data}");
+      return Right(model);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }

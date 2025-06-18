@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:service_app/features/service/get_service/presentation/view_model/get_service_cubit.dart';
+
+import '../../../data/models/service_details_model.dart';
+
+
 class ServiceDetailsScreen extends StatelessWidget {
   static const String routeName = "serviceDetailsScreen";
 
@@ -9,91 +18,151 @@ class ServiceDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'E-Services Details',
-          style: GoogleFonts.montserrat(
-              fontWeight: FontWeight.w600, fontSize: 22.sp),
+    final args = ModalRoute.of(context)!.settings.arguments as int;
+    return BlocProvider(
+      create: (_) => GetServiceCubit()..getServiceDetails(serviceId: args),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'E-Services Details',
+            style: GoogleFonts.montserrat(
+              fontWeight: FontWeight.w600,
+              fontSize: 22.sp,
+            ),
+          ),
+          centerTitle: true,
+          elevation: 0,
+          surfaceTintColor: Colors.transparent,
         ),
-        centerTitle: true,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Center(
-          child: Card(
-            color: Theme.of(context).colorScheme.onBackground,
-            elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child:Container(
-              height: MediaQuery.of(context).size.height-200,
-              child: ListView.separated(
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Row(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                              "Title",
-                              maxLines: 2,
-                              style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary)),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Text(
-                              "content",
-                              maxLines: 2,
-                              style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey)),
-                        ],
-                      ),
-                      Spacer(),
-                      Container(
-                        width: 40.w,
-                        height: 40.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: Colors.green[200]
-                        ),
-                        child: Center(
-                          child: Image.asset("assets/images/content-writing.png",width:32.w,height: 32.h,),
-                        ),
-                      )
-                    ],
+        body: BlocBuilder<GetServiceCubit, GetServiceState>(
+          builder: (context, state) {
+            if (state is GetServiceDetailsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is GetServiceDetailsError) {
+              return Center(child: Text("Error: ${state.failures.errorMsg}"));
+            } else if (state is GetServiceDetailsSuccess) {
+              final service = state.model.result?.service;
+              final fields = service?.fieldsConfig
+                  ?.where((field) =>
+              field.status != "no")
+                  .toList() ??
+                  [];
+
+              final staticFields = {
+                'Name': service?.name,
+                'Phone': service?.phone,
+                'Date': service?.date,
+                'National ID': service?.nationalId,
+                'Stage': service?.stage,
+                'Category': service?.category,
+                'Subcategory': service?.subCategory,
+                'Service Type': service?.serviceType,
+                'Service Type ID': service?.serviceTypeId.toString(),
+                'Partner': service?.partner,
+              };
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: Card(
+                  color: Theme.of(context).colorScheme.onBackground,
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ),
-                separatorBuilder: (context, index) =>
-                    Divider(
+                  child: ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    itemCount: staticFields.length + fields.length,
+                    itemBuilder: (context, index) {
+                      if (index < staticFields.length) {
+                        final key = staticFields.keys.elementAt(index);
+                        final value = staticFields[key] ?? '—';
+                        return _buildDetailItem(context, key, value);
+                      } else {
+                        final field = fields[index - staticFields.length];
+                        final label = field.label ?? field.name ?? '';
+                        final value = _getServiceValue(service!, field.name ?? '');
+                        final optionalSuffix = field.status == 'optional' ? " (optional)" : "";
+                        return _buildDetailItem(context, "$label$optionalSuffix", value);
+                      }
+                    },
+                    separatorBuilder: (context, index) => Divider(
                       endIndent: 20,
                       indent: 20,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                padding: EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 8),
-                itemCount:7),)
-          ),
+                  ),
+                ),
+              );
+            } else {
+              return const Center(child: Text("Unexpected state"));
+            }
+          },
         ),
-      )
+      ),
     );
+  }
+
+  Widget _buildDetailItem(BuildContext context, String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  value,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: 40.w,
+            height: 40.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: Colors.green[200],
+            ),
+            child: Center(
+              child: Image.asset(
+                "assets/images/content-writing.png",
+                width: 32.w,
+                height: 32.h,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _getServiceValue(Service service, String fieldName) {
+    final Map<String, dynamic> serviceMap = service.toJson();
+    final value = serviceMap[fieldName];
+    if (value == null || value.toString().isEmpty) return "—";
+    return value.toString();
   }
 }
 
 
-class AttachmentsSection extends StatelessWidget {
+
+/*class AttachmentsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -153,4 +222,4 @@ class ReplySection extends StatelessWidget {
       ),
     );
   }
-}
+}*/

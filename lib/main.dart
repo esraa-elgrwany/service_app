@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/core/cache/shared_preferences.dart';
 import 'package:service_app/core/utils/observer.dart';
 import 'package:service_app/core/utils/styles/my_theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:service_app/features/auth/presentation/view/phone_num_screen.dart';
 import 'package:service_app/features/auth/presentation/view/sign_up_screen.dart';
 import 'package:service_app/features/auth/presentation/view/verification_screen.dart';
@@ -20,6 +19,7 @@ import 'features/home/presentation/view/screens/home_screen.dart';
 import 'features/news/presentation/view/screens/news_details_screen.dart';
 import 'features/news/presentation/view/screens/news_screen.dart';
 import 'features/service/get_service/presentation/view/screens/service_details_screen.dart';
+import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

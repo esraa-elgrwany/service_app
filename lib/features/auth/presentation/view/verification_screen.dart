@@ -228,7 +228,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 4),
                                               ),
                                             );
-                                            CacheData.saveId(data: state.model.result?.userId??0, key: "userId");
+                                            CacheData.saveId(data: state.model.userId??0, key: "userId");
                                             Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(builder: (context) => HomeScreen()),

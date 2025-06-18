@@ -12,7 +12,7 @@ part 'get_service_state.dart';
 
 class GetServiceCubit extends Cubit<GetServiceState> {
   List<Services> services=[];
-  List<Service> serviceDetails=[];
+  Service? serviceDetails;
   static GetServiceCubit get(context) => BlocProvider.of(context);
   GetServiceCubit() : super(GetServiceInitial());
 
@@ -27,6 +27,21 @@ class GetServiceCubit extends Cubit<GetServiceState> {
     }, (r) {
       emit(GetServiceSuccess(r));
       services=r.result?.services??[];
+      print("Service success++++++++++++++++++++++++++************************+${r.result}");
+    });
+  }
+
+  void getServiceDetails({required int serviceId}) async{
+    emit(GetServiceDetailsLoading());
+    ApiManager apiManager=ApiManager();
+    GetServiceRepo addServiceRepo =GetServiceRepoImpl(apiManager);
+    var res=await addServiceRepo.getServiceDetails(serviceId:serviceId );
+    res?.fold((l) {
+      print("Service error++++++++++++++++++++++++++************************+${l.errorMsg}");
+      emit(GetServiceDetailsError(l));
+    }, (r) {
+      emit(GetServiceDetailsSuccess(r));
+      serviceDetails = r.result?.service;
       print("Service success++++++++++++++++++++++++++************************+${r.result}");
     });
   }

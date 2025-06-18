@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:service_app/core/cache/shared_preferences.dart';
 import 'package:service_app/core/utils/styles/colors.dart';
 import 'package:service_app/features/auth/presentation/view/phone_num_screen.dart';
 import 'package:service_app/features/setting/model_view/setting_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class SettingScreen extends StatefulWidget {
   static const String routeName = "settingScreen";

@@ -7,11 +7,11 @@ class ServiceDetailsModel {
   ServiceDetailsModel.fromJson(dynamic json) {
     jsonrpc = json['jsonrpc'];
     id = json['id'];
-    result = json['result'] != null ? Result.fromJson(json['result']) : null;
+    result = json['result'] != null ? ServiceDetailsResult.fromJson(json['result']) : null;
   }
   String? jsonrpc;
   dynamic id;
-  Result? result;
+  ServiceDetailsResult? result;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -25,12 +25,12 @@ class ServiceDetailsModel {
 
 }
 
-class Result {
-  Result({
+class ServiceDetailsResult {
+  ServiceDetailsResult({
       this.success, 
       this.service,});
 
-  Result.fromJson(dynamic json) {
+  ServiceDetailsResult.fromJson(dynamic json) {
     success = json['success'];
     service = json['service'] != null ? Service.fromJson(json['service']) : null;
   }

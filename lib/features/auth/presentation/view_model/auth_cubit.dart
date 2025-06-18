@@ -16,19 +16,20 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   static AuthCubit get(context) => BlocProvider.of(context);
+
   AuthCubit() : super(AuthInitial());
 
-  void sendOtp({required String phone}) async{
+  void sendOtp({required String phone}) async {
     emit(SendOtpLoading());
-    ApiManager apiManager=ApiManager();
+    ApiManager apiManager = ApiManager();
     AuthRepo authRepo = AuthRepoImpl(apiManager);
-    var res=await authRepo.sendOtp(phone: phone);
+    var res = await authRepo.sendOtp(phone: phone);
     res?.fold((l) {
       print("++++++++++++++++++++++++++************************+${l.errorMsg}");
       emit(SendOtpError(l));
     }, (r) {
-        emit(SendOtpSuccess(r));
-        print("++++++++++++++++++++++++++************************+${r.result}");
+      emit(SendOtpSuccess(r));
+      print("++++++++++++++++++++++++++************************+${r}");
     });
   }
 
@@ -44,19 +45,11 @@ class AuthCubit extends Cubit<AuthState> {
     final res = await authRepo.verifyOtp(phone: phone, otp: otp);
 
     res?.fold(
-          (failure) {
+      (failure) {
         emit(VerifyOtpErrorState(failure.errorMsg));
       },
-          (data) {
-        if (data is VerifyOtpSuccessModel && data.result?.success == true) {
-          emit(VerifyOtpSuccessState(data));
-        } else if (data is VerifyOtpSignupModel && data.result?.success == false) {
-          emit(VerifyOtpSignupRequiredState(data.result?.phone ?? ''));
-        } else if (data is VerifyOtpErrorModel) {
-          emit(VerifyOtpErrorState(data.result?.error ?? 'An unexpected error occurred.'));
-        } else {
-          emit(VerifyOtpErrorState('Unexpected response from server.'));
-        }
+      (data) {
+        emit(VerifyOtpSuccessState(data));
       },
     );
   }
@@ -83,17 +76,12 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     result?.fold(
-          (failure) {
+      (failure) {
         emit(SignUpErrorState(failure.errorMsg));
       },
-          (data) {
-        if (data is SignUpSuccessModel) {
+      (data) {
           emit(SignUpSuccessState(data));
-        } else if (data is SignUpErrorModel) {
-          emit(SignUpErrorState(data.result?.error ?? "Something went wrong"));
-        }
       },
     );
   }
-
 }

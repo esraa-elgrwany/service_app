@@ -96,6 +96,7 @@ class _ViewServiceScreenState extends State<ViewServiceScreen> {
                               Navigator.pushNamed(
                                 context,
                                 ServiceDetailsScreen.routeName,
+                                arguments: services[index].id!
                               );
                             },
                             child: ServiceItem(

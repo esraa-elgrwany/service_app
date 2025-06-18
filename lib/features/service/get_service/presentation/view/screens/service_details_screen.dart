@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/get_service/presentation/view_model/get_service_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../data/models/service_details_model.dart';
 
 

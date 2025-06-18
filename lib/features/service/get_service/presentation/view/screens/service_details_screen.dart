@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/get_service/presentation/view_model/get_service_cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/models/service_details_model.dart';
 
@@ -37,14 +38,16 @@ class ServiceDetailsScreen extends StatelessWidget {
         body: BlocBuilder<GetServiceCubit, GetServiceState>(
           builder: (context, state) {
             if (state is GetServiceDetailsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(color: Colors.green,));
             } else if (state is GetServiceDetailsError) {
               return Center(child: Text("Error: ${state.failures.errorMsg}"));
             } else if (state is GetServiceDetailsSuccess) {
               final service = state.model.result?.service;
               final fields = service?.fieldsConfig
                   ?.where((field) =>
-              field.status != "no")
+              field.status != "no" &&
+                  !(field.status == "optional" &&
+                      (_getServiceValue(service!, field.name ?? '') == "—")))
                   .toList() ??
                   [];
 
@@ -60,6 +63,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                 'Service Type ID': service?.serviceTypeId.toString(),
                 'Partner': service?.partner,
               };
+
               return Padding(
                 padding: const EdgeInsets.all(16),
                 child: Card(
@@ -102,6 +106,8 @@ class ServiceDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildDetailItem(BuildContext context, String title, String value) {
+    final isLocation = title.toLowerCase().contains("location");
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -115,17 +121,39 @@ class ServiceDetailsScreen extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 SizedBox(height: 8.h),
-                Text(
+                isLocation
+                    ? GestureDetector(
+                  onTap: () async {
+                    final uri = Uri.parse(value);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Could not launch map")),
+                      );
+                    }
+                  },
+                  child: Text(
+                    value,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                )
+                    : Text(
                   value,
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                     color: Colors.grey,
                   ),
                 ),
@@ -151,6 +179,7 @@ class ServiceDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
 
   String _getServiceValue(Service service, String fieldName) {
     final Map<String, dynamic> serviceMap = service.toJson();

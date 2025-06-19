@@ -8,6 +8,7 @@ import 'package:service_app/core/utils/styles/colors.dart';
 import 'package:service_app/features/service/add_service/data/models/government_model.dart';
 import 'package:service_app/features/service/add_service/data/models/states_model.dart';
 import 'package:service_app/features/service/add_service/data/models/village_model.dart';
+import 'package:service_app/features/service/add_service/presentation/view/screens/map_picker_screen.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/drop_down_container.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/govern_dialog.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/state_dialog.dart';
@@ -47,8 +48,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController idController = TextEditingController();
   final TextEditingController referenceController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
-
+   String? location;
   PlatformFile? uploadedFile;
 
   @override
@@ -139,8 +139,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   hint: user.phone ?? "",
                                   icon: Icons.phone,
                                   validateTxt: "Required",
-                                    maxLine:1,
-                                readOnly: true,
+                                  maxLine: 1,
+                                  readOnly: true,
                                 ),
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
@@ -154,10 +154,13 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 SizedBox(height: 16.h),
                                 if (fields[1].status != "no")
                                   InkWell(
-                                    onTap: () => _showGovernmentSelectionDialog(),
+                                    onTap: () =>
+                                        _showGovernmentSelectionDialog(),
                                     child: DropDownContainer(
-                                      text: selectedGovernment?.governmentName ??
-                                          "Government",
+                                      text:
+                                          selectedGovernment?.governmentName ??
+                                              "Government",
+                                      isLocation: false,
                                     ),
                                   ),
                                 if (fields[1].status != "no")
@@ -167,6 +170,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                     onTap: () => _showStateSelectionDialog(),
                                     child: DropDownContainer(
                                       text: selectedState?.stateName ?? "State",
+                                      isLocation: false,
                                     ),
                                   ),
                                 if (fields[0].status != "no")
@@ -175,8 +179,9 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   InkWell(
                                     onTap: () => _showVillageSelectionDialog(),
                                     child: DropDownContainer(
-                                      text:
-                                          selectedVillage?.villageName ?? "Village",
+                                      text: selectedVillage?.villageName ??
+                                          "Village",
+                                      isLocation: false,
                                     ),
                                   ),
                                 if (fields[2].status != "no")
@@ -188,9 +193,10 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                     readOnly: false,
                                     maxLine: 1,
                                     icon: Icons.text_fields_rounded,
-                                    validateTxt: (fields[3].status == "required")
-                                        ? "Required"
-                                        : "",
+                                    validateTxt:
+                                        (fields[3].status == "required")
+                                            ? "Required"
+                                            : "",
                                   ),
                                 if (fields[3].status != "no")
                                   SizedBox(height: 16.h),
@@ -205,15 +211,25 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 if (fields[5].status != "no")
                                   SizedBox(height: 16.h),
                                 if (fields.last.status != "no")
-                                  TextFormWidget(
-                                    controller: locationController,
-                                    hint: "Location",
-                                     readOnly: false,
-                                    maxLine: 1,
-                                    icon: Icons.location_on_outlined,
-                                    validateTxt: (fields.last.status == "required")
-                                        ? "Required"
-                                        : "",
+                                  InkWell(
+                                    onTap: () async {
+                                      final result = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => MapPickerScreen()),
+                                      );
+                                      if (result != null &&
+                                          result['address'] != null) {
+                                        setState(() {
+                                          location =
+                                              result['address'];
+                                        });
+                                      }
+                                    },
+                                    child: DropDownContainer(
+                                      text:location==null?"Location":location??"no location",
+                                      isLocation: true,
+                                    ),
                                   ),
                                 if (fields.last.status != "no")
                                   SizedBox(height: 16.h),
@@ -239,7 +255,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 if (documents.isNotEmpty)
                                   ListView.builder(
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: documents.length,
                                     itemBuilder: (context, index) {
                                       final doc = documents[index];
@@ -268,8 +285,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 SizedBox(height: 16.h),
                                 ElevatedButton.icon(
                                   onPressed: _pickFile,
-                                  icon:
-                                      Icon(Icons.upload_file, color: primaryColor),
+                                  icon: Icon(Icons.upload_file,
+                                      color: primaryColor),
                                   label: Text(
                                     "Upload File",
                                     style: GoogleFonts.montserrat(
@@ -284,8 +301,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                       side: BorderSide(color: primaryColor),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
                                   ),
                                 ),
                                 if (uploadedFile != null)
@@ -316,7 +333,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                           backgroundColor: Colors.grey[200],
                                           title: Text(
                                             "Error",
-                                            style: TextStyle(color: primaryColor),
+                                            style:
+                                                TextStyle(color: primaryColor),
                                           ),
                                           content: Text(
                                             state.failures.errorMsg,
@@ -336,7 +354,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         ),
                                       );
                                     } else if (state is SubmitServiceSuccess) {
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
                                         SnackBar(
                                             content: Text(
                                               "Submit Service Request successfully!",
@@ -363,27 +382,37 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                       onPressed: () {
                                         final fieldsData = <String, dynamic>{};
 
-                                        if (fields[1].status != "no"&& selectedGovernment != null) {
-                                          fieldsData["government_id"] = selectedGovernment!.id;
+                                        if (fields[1].status != "no" &&
+                                            selectedGovernment != null) {
+                                          fieldsData["government_id"] =
+                                              selectedGovernment!.id;
                                         }
 
-                                        if (fields[0].status != "no" && selectedState != null) {
-                                          fieldsData["state_id"] = selectedState!.id;
+                                        if (fields[0].status != "no" &&
+                                            selectedState != null) {
+                                          fieldsData["state_id"] =
+                                              selectedState!.id;
                                         }
-                                        if (fields[2].status != "no" && selectedVillage != null) {
-                                          fieldsData["village_name_id"] = selectedVillage!.id;
+                                        if (fields[2].status != "no" &&
+                                            selectedVillage != null) {
+                                          fieldsData["village_name_id"] =
+                                              selectedVillage!.id;
                                         }
                                         if (fields.last.status != "no") {
-                                          fieldsData["location"] = locationController.text;
+                                          fieldsData["location"] =
+                                              location;
                                         }
                                         if (fields[3].status != "no") {
-                                          fieldsData["reference"] = referenceController.text;
+                                          fieldsData["reference"] =
+                                              referenceController.text;
                                         }
-                                        if (fields[4].status != "no" && fromDate != null) {
+                                        if (fields[4].status != "no" &&
+                                            fromDate != null) {
                                           fieldsData["from_date"] = fromDate;
                                         }
 
-                                        if (fields[5].status != "no" && toDate != null) {
+                                        if (fields[5].status != "no" &&
+                                            toDate != null) {
                                           fieldsData["to_date"] = toDate;
                                         }
                                         print("fields data:$fieldsData");
@@ -394,11 +423,13 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         print("from date$toDate");
                                         if (_formKey.currentState!.validate() &&
                                             validateDynamicFields(fields)) {
-                                          AddServiceCubit.get(context).submitService(
+                                          AddServiceCubit.get(context)
+                                              .submitService(
                                             categoryId: categoryId,
                                             subCategoryId: subCategoryId,
                                             serviceTypeId: serviceTypeId,
-                                            description: _descriptionController.text,
+                                            description:
+                                                _descriptionController.text,
                                             fieldsData: fieldsData,
                                           );
                                         }
@@ -408,7 +439,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 14),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                       ),
                                       child: Text(
@@ -520,14 +552,13 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
       showSnackBar("To Date is required");
       return false;
     }
-    if (fields.last.status == "required" && locationController.text.isEmpty) {
+    if (fields.last.status == "required" && location==null) {
       showSnackBar("Location is required");
       return false;
     }
 
     return true;
   }
-
 
   void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -539,7 +570,6 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
       ),
     );
   }
-
 
   Future<void> _pickFile() async {
     try {

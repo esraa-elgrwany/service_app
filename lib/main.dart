@@ -12,6 +12,7 @@ import 'package:service_app/features/auth/presentation/view/verification_screen.
 import 'package:service_app/features/home/presentation/view/screens/e_service_screen.dart';
 import 'package:service_app/features/service/add_service/presentation/view/screens/add_service_screen.dart';
 import 'package:service_app/features/service/add_service/presentation/view/screens/add_service_second_screen.dart';
+import 'package:service_app/features/service/add_service/presentation/view/screens/map_picker_screen.dart';
 import 'package:service_app/features/service/get_service/presentation/view/screens/view_service_screen.dart';
 import 'package:service_app/features/setting/model_view/setting_cubit.dart';
 import 'package:service_app/features/setting/view/setting_screen.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
                     HomeScreen.routeName: (context) => HomeScreen(),
                     SettingScreen.routeName: (context) => SettingScreen(),
                     PhoneNumScreen.routeName: (context) => PhoneNumScreen(),
+                    MapPickerScreen.routeName: (context) => MapPickerScreen(),
                     VerificationScreen.routeName: (context) =>
                         VerificationScreen(),
                     ServiceScreen.routeName: (context) => ServiceScreen(),

@@ -67,7 +67,8 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             },
                             child: DropDownContainer(
                                 text:
-                                    selectedCategory?.name ?? "Main Category")),
+                                    selectedCategory?.name ?? "Main Category",
+                              isLocation: false,)),
                         SizedBox(height: 16.h),
                         InkWell(
                             onTap: () {
@@ -75,7 +76,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             },
                             child: DropDownContainer(
                                 text: selectedSubCategory?.name ??
-                                    "Sub Category")),
+                                    "Sub Category",isLocation: false,)),
                         SizedBox(height: 16.h),
                         InkWell(
                             onTap: () {
@@ -83,7 +84,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             },
                             child: DropDownContainer(
                                 text: selectedServiceType?.name ??
-                                    "Service Type")),
+                                    "Service Type",isLocation: false,)),
                         SizedBox(height: 16.h),
                         ElevatedButton(
                           onPressed: () {

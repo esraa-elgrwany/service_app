@@ -4,7 +4,8 @@ import 'package:service_app/core/utils/styles/colors.dart';
 
 class DropDownContainer extends StatelessWidget{
   String text;
-  DropDownContainer({required this.text});
+  bool isLocation;
+  DropDownContainer({required this.text,required this.isLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class DropDownContainer extends StatelessWidget{
           InkWell(
             onTap: () {
             },
-              child: Icon(Icons.arrow_drop_down,size:28.sp,color: primaryColor)),
+              child:isLocation?Icon(Icons.location_on_outlined,size:28.sp,color: primaryColor) :Icon(Icons.arrow_drop_down,size:28.sp,color: primaryColor)),
         ],
       ),
     );

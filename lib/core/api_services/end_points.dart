@@ -20,4 +20,6 @@ class EndPoints{
       "/api/service_types/$serviceId/document_types";
   static String serviceDetails(int serviceId) =>"/api/service_request/$serviceId";
   static const String createServices= "/api/create/service";
+  static const String getNews="/api/blogs";
+  static String newsDetails(int newsId) =>"/api/blogs/$newsId";
 }

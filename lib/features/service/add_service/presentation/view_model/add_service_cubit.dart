@@ -180,7 +180,7 @@ class AddServiceCubit extends Cubit<AddServiceState> {
     required String description,
     required Map<String, dynamic> fieldsData,
   }) async{
-    emit(GetDocumentLoading());
+    emit(SubmitServiceLoading());
     ApiManager apiManager=ApiManager();
     AddServiceRepo addServiceRepo =AddServiceRepoImpl(apiManager);
     var res=await addServiceRepo. submitService(categoryId:categoryId ,subCategoryId: subCategoryId,serviceTypeId: serviceTypeId

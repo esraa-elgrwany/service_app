@@ -90,6 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     controller: phoneController,
                                     hint:phoneController.text,
                                     icon: Icons.call,
+                                    readOnly: true,
                                     maxLine: 1,
                                     validateTxt:
                                         "please enter your phone number"),
@@ -107,6 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     controller: userController,
                                     hint: "name",
                                     icon: Icons.person,
+                                    readOnly: false,
                                     maxLine: 1,
                                     validateTxt: "please enter your username"),
                                 SizedBox(height: 16.h),
@@ -123,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 TextFormWidget(
                                     controller: idController,
                                     hint: "id number",
-                                    icon: Icons.numbers,
+                                    icon: Icons.numbers,readOnly:false,
                                     maxLine: 1,
                                     validateTxt: "please enter your id number"),
                                 SizedBox(height: 16.h),
@@ -154,6 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   },
                                   child: AbsorbPointer(
                                       child: TextFormWidget(
+                                        readOnly: false,
                                           controller: dateController,
                                           hint: 'id expiry date',
                                           validateTxt: "required",
@@ -175,6 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     controller: addressController,
                                     hint: "address",
                                     icon: Icons.location_on_outlined,
+                                    readOnly: false,
                                     maxLine: 1,
                                     validateTxt: "please enter your address"),
                                 SizedBox(height: 30.h),

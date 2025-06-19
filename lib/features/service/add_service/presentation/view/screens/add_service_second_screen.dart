@@ -11,11 +11,11 @@ import 'package:service_app/features/service/add_service/data/models/village_mod
 import 'package:service_app/features/service/add_service/presentation/view/widgets/drop_down_container.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/govern_dialog.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/state_dialog.dart';
-import 'package:service_app/features/service/add_service/presentation/view/widgets/text_form_num.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/text_form_widget.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/village_dialog.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
 
+import '../../../../../../core/cache/shared_preferences.dart';
 import '../../../data/models/get_fields_model.dart';
 
 class AddServiceSecondScreen extends StatefulWidget {
@@ -52,6 +52,19 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
   PlatformFile? uploadedFile;
 
   @override
+  void initState() {
+    super.initState();
+    _loadCachedUserData();
+  }
+
+  void _loadCachedUserData() async {
+    nameController.text = await CacheData.getData(key: "name") ?? "";
+    _phoneController.text = await CacheData.getData(key: "phone") ?? "";
+    idController.text = await CacheData.getData(key: "nationalId") ?? "";
+    setState(() {}); // Update UI after async
+  }
+
+  @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
     final int categoryId = args['categoryId'];
@@ -77,14 +90,13 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
           ..getUser(),
         child: BlocBuilder<AddServiceCubit, AddServiceState>(
           builder: (context, state) {
-            bool isLoading = state is SubmitServiceLoading;
             final documents = context.read<AddServiceCubit>().document;
             final fields = context.read<AddServiceCubit>().fields;
             final user = context.read<AddServiceCubit>().user;
             if (fields.length < 7) {
               return const Center(child: CircularProgressIndicator());
             }
-
+            bool isLoading = state is SubmitServiceLoading;
             return Stack(
               children: [
                 Center(
@@ -109,6 +121,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   hint: user.userName ?? "",
                                   maxLine: 1,
                                   icon: Icons.person,
+                                  readOnly: true,
                                   validateTxt: "Required",
                                 ),
                                 SizedBox(height: 16.h),
@@ -116,21 +129,25 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   controller: idController,
                                   hint: user.nationalId ?? "",
                                   maxLine: 1,
+                                  readOnly: true,
                                   icon: Icons.card_membership,
                                   validateTxt: "Required",
                                 ),
                                 SizedBox(height: 16.h),
-                                TextFormNum(
+                                TextFormWidget(
                                   controller: _phoneController,
                                   hint: user.phone ?? "",
                                   icon: Icons.phone,
                                   validateTxt: "Required",
+                                    maxLine:1,
+                                readOnly: true,
                                 ),
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
                                   controller: _descriptionController,
                                   hint: "Description",
                                   maxLine: 3,
+                                  readOnly: false,
                                   icon: Icons.description,
                                   validateTxt: "Required",
                                 ),
@@ -168,6 +185,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   TextFormWidget(
                                     controller: referenceController,
                                     hint: "Reference",
+                                    readOnly: false,
                                     maxLine: 1,
                                     icon: Icons.text_fields_rounded,
                                     validateTxt: (fields[3].status == "required")
@@ -190,6 +208,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   TextFormWidget(
                                     controller: locationController,
                                     hint: "Location",
+                                     readOnly: false,
                                     maxLine: 1,
                                     icon: Icons.location_on_outlined,
                                     validateTxt: (fields.last.status == "required")
@@ -371,6 +390,8 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         print("categoryId:$categoryId");
                                         print("subCategoryId:$subCategoryId");
                                         print("serviceTypeId:$serviceTypeId");
+                                        print("from date$fromDate");
+                                        print("from date$toDate");
                                         if (_formKey.currentState!.validate() &&
                                             validateDynamicFields(fields)) {
                                           AddServiceCubit.get(context).submitService(

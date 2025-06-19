@@ -233,6 +233,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                 onTap: () {
                                   CacheData.removeData("userId");
                                   CacheData.removeData("phone");
+                                  CacheData.removeData("name");
+                                  CacheData.removeData("nationalId");
                                   Navigator.pushReplacementNamed(
                                       context, PhoneNumScreen.routeName);
                                 },

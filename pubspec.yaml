@@ -52,6 +52,9 @@ dependencies:
   google_fonts: ^6.2.1
   file_picker: ^10.2.0
   cached_network_image: ^3.3.0
+  geocoding: ^4.0.0
+  google_maps_flutter: ^2.12.3
+  location: ^8.0.1
 dev_dependencies:
  flutter_test:
    sdk: flutter

@@ -4,10 +4,7 @@ import 'package:service_app/core/api_services/api-manager.dart';
 import 'package:service_app/core/api_services/end_points.dart';
 import 'package:service_app/core/failures/failures.dart';
 import 'package:service_app/features/auth/data/models/send_otp_model.dart';
-import 'package:service_app/features/auth/data/models/sign_up_error_model.dart';
 import 'package:service_app/features/auth/data/models/sign_up_success_model.dart';
-import 'package:service_app/features/auth/data/models/verify_otp_error_model.dart';
-import 'package:service_app/features/auth/data/models/verify_otp_signup_model.dart';
 import 'package:service_app/features/auth/data/models/verify_otp_success_model.dart';
 import 'package:service_app/features/auth/data/repo/auth_repo.dart';
 
@@ -53,6 +50,7 @@ class AuthRepoImpl implements AuthRepo {
         return left(ServerFailure("Something went wrong"));
       }
     }
+
   }
 
   @override
@@ -75,4 +73,5 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure(e.toString()));
     }
     }
+
   }

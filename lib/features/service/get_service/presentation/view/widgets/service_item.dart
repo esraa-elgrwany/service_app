@@ -36,7 +36,8 @@ class ServiceItem extends StatelessWidget{
               children: [
                 Expanded(
                   child: Text(
-                   services[index].name??"no name",
+                    services[index].name==""?"No title":
+                   services[index].name??"No title",
                     style:  TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),

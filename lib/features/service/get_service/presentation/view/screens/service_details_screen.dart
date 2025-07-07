@@ -56,7 +56,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                 'Subcategory': service?.subCategory,
                 'Service Type': service?.serviceType,
                 'Service Type ID': service?.serviceTypeId.toString(),
-                'Partner': service?.partner,
+                //'Partner': service?.partner,
               };
 
               return Padding(
@@ -77,8 +77,8 @@ class ServiceDetailsScreen extends StatelessWidget {
                         return _buildDetailItem(context, key, value);
                       } else {
                         final field = fields[index - staticFields.length];
-                        final label = field.label ?? field.name ?? '';
-                        final value = _getServiceValue(service!, field.name ?? '');
+                        final label = field.label ?? field.name ?? '—';
+                        final value = _getServiceValue(service!, field.name ?? '—');
                         final optionalSuffix = field.status == 'optional' ? " (optional)" : "";
                         return _buildDetailItem(context, "$label$optionalSuffix", value);
                       }

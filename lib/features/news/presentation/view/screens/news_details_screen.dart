@@ -48,37 +48,40 @@ class NewsDetailsScreen extends StatelessWidget {
                       SizedBox(
                         height: 8.h,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                        child: Image.network(
-                          "${Constants.baseUrl}${newsItem?.image}",
-                          width: double.infinity,
-                          height: 200.h,
-                          fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              width: double.infinity,
-                              height: 200.h,
-                              color: Colors.grey.shade200,
-                              alignment: Alignment.center,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.broken_image,
-                                      size: 48.sp, color: Colors.black),
-                                  SizedBox(height: 8.h),
-                                  Text(
-                                    "Image failed to load",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14.sp,
-                                    ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            child: Image.network(
+                              "${Constants.baseUrl}${newsItem?.image}",
+                              height: 180.h,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  width: double.infinity,
+                                  height: 200.h,
+                                  color: Colors.grey.shade200,
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.broken_image,
+                                          size: 48.sp, color: Colors.black),
+                                      SizedBox(height: 8.h),
+                                      Text(
+                                        "Image failed to load",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16).w,
@@ -117,7 +120,6 @@ class NewsDetailsScreen extends StatelessWidget {
                                         style: {
                                           "p": Style(
                                             fontSize: FontSize(14.sp),
-                                            color: Colors.black87,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         },

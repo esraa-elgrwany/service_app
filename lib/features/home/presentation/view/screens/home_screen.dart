@@ -4,6 +4,8 @@ import 'package:service_app/features/home/presentation/view/widgets/home_card_it
 import 'package:service_app/features/setting/view/setting_screen.dart';
 import 'package:service_app/l10n/app_localizations.dart';
 
+import '../../../../../core/cache/shared_preferences.dart';
+
 class HomeScreen extends StatelessWidget{
   static const String routeName="homeScreen";
   const HomeScreen({super.key});
@@ -45,9 +47,9 @@ class HomeScreen extends StatelessWidget{
                             style: TextStyle(
                                 fontSize: 22.sp, fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onSurface),
                           ),
-                          Text("Mohamed",
+                          Text(CacheData.getData(key: "name") ?? "",
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: 18.sp,
                                 color: Colors.grey
                               )),
                         ],

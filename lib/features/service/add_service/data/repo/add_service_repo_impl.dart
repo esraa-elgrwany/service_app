@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:service_app/core/api_services/api-manager.dart';
+import 'package:service_app/core/api_services/end_points.dart';
 import 'package:service_app/core/failures/failures.dart';
 import 'package:service_app/core/utils/constants.dart';
 import 'package:service_app/features/service/add_service/data/models/category_model.dart';
@@ -13,11 +13,8 @@ import 'package:service_app/features/service/add_service/data/models/service_typ
 import 'package:service_app/features/service/add_service/data/models/states_model.dart';
 import 'package:service_app/features/service/add_service/data/models/sub_category_model.dart';
 import 'package:service_app/features/service/add_service/data/models/submit_service_model.dart';
-import 'package:service_app/features/service/add_service/data/models/user_model.dart';
 import 'package:service_app/features/service/add_service/data/models/village_model.dart';
 import 'package:service_app/features/service/add_service/data/repo/add_service_repo.dart';
-
-import '../../../../../core/api_services/end_points.dart';
 
 class AddServiceRepoImpl implements AddServiceRepo{
   ApiManager apiManager;
@@ -176,24 +173,6 @@ class AddServiceRepoImpl implements AddServiceRepo{
     }
   }
 
-  @override
-  Future<Either<Failures, UserModel>>? getUser() async{
-    try {
-      Response response = await apiManager.getData(
-        EndPoints.getUser,
-        data: {},
-      );
-      UserModel model = UserModel.fromJson(response.data);
-      print("User Model data: ${response.data}");
-      return Right(model);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure(e.message ?? "failed to get User data"));
-      } else {
-        return left(ServerFailure("some thing went wrong"));
-      }
-    }
-  }
 
   @override
   Future<Either<Failures, SubmitServiceModel>>? submitService({required int categoryId, required int subCategoryId,
@@ -221,12 +200,67 @@ class AddServiceRepoImpl implements AddServiceRepo{
       print("Submit Service data: ${response.data}");
       return Right(model);
     } catch (e) {
+  if (e is DioException) {
+  print("🧨 Dio error response: ${e.response?.data}");
+  print("🧨 Dio error status code: ${e.response?.statusCode}");
+  return left(ServerFailure(e.response?.data.toString() ?? "Failed"));
+  } else {
+  return left(ServerFailure("Something went wrong"));
+  }
+  }
+
+}
+  /*@override
+  Future<Either<Failures, SubmitServiceModel>>? submitService({required int categoryId, required int subCategoryId,
+    required int serviceTypeId, required String description, required Map<String, dynamic> fieldsData,List<File>? files})async {
+    final dio = Dio();
+
+    try {
+      final payload = {
+        "category_id": categoryId,
+        "sub_category_id": subCategoryId,
+        "service_type_id": serviceTypeId,
+        "description": description,
+        "fields_data": fieldsData,
+      };
+      final formData = FormData.fromMap({
+        "payload_json": jsonEncode(payload),
+      });
+      /*final formData = FormData();
+
+      formData.fields.add(MapEntry("payload_json", jsonEncode(payload)));
+
+     if (files != null && files.isNotEmpty) {
+        for (var file in files) {
+          final fileName = file.path.split("/").last;
+          formData.files.add(MapEntry(
+            "files",
+            await MultipartFile.fromFile(file.path, filename: fileName),
+          ));
+        }
+      }
+final response = await dio.post(
+        Constants.baseUrl + EndPoints.createServices,
+        data: formData,
+      );*/
+      final response = await dio.post(
+        Constants.baseUrl + EndPoints.createServices,
+        data: formData,
+        options: Options(
+          contentType: 'multipart/form-data',
+        ),
+      );
+
+      SubmitServiceModel model = SubmitServiceModel.fromJson(response.data);
+      print("Submit Service data: ${response.data}");
+      return Right(model);
+    } catch (e) {
       if (e is DioException) {
         return left(ServerFailure(e.message ?? "failed to Submit Service"));
       } else {
         return left(ServerFailure("some thing went wrong"));
       }
     }
-  }
+  }*/
 
 }

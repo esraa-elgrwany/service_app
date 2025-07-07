@@ -32,39 +32,38 @@ class NewsItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-            child: Image.network(
-              "${Constants.baseUrl}${news[index].image}",
-              height: 160.h,
-              width: double.infinity,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                child: Image.network(
+                  "${Constants.baseUrl}${news[index].image}",
+                  height: 160.h,
                   width: double.infinity,
-                  height: 200.h,
-                  color: Colors.grey.shade200,
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.broken_image,
-                          size: 48.sp, color: Colors.black),
-                      SizedBox(height: 8.h),
-                      Text(
-                        "Image failed to load",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.sp,
-                        ),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: double.infinity,
+                      height: 200.h,
+                      color: Colors.grey.shade200,
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.broken_image,
+                              size: 48.sp, color: Colors.black),
+                          SizedBox(height: 8.h),
+                          Text(
+                            "Image failed to load",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+                    );
+                  },
+                ),
+              ),
           Padding(
             padding: const EdgeInsets.all(12),
             child: Column(

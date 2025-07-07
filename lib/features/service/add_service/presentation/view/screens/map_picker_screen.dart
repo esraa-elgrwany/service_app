@@ -28,11 +28,14 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
       final address = placeMarks.isNotEmpty
           ? "${placeMarks.first.name},${placeMarks.first.locality}"
           : "Unknown location";
+      final locationLink =
+          "https://www.google.com/maps/search/?api=1&query=${_selectedLatLng!.latitude},${_selectedLatLng!.longitude}";
 
       Navigator.pop(context, {
         "lat": _selectedLatLng!.latitude,
         "lng": _selectedLatLng!.longitude,
         "address": address,
+        "link": locationLink,
       });
     }
   }
@@ -41,7 +44,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Select Location on Map",style: TextStyle(
-        fontSize: 22.sp
+        fontSize: 22.sp,fontWeight: FontWeight.w600
       ),)),
       body: FlutterMap(
         options: MapOptions(
@@ -59,8 +62,8 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
               markers: [
                 Marker(
                   point: _selectedLatLng!,
-                  width: 40,
-                  height: 40,
+                  width: 40.w,
+                  height: 40.h,
                   child:Icon(Icons.location_on, color: Colors.red, size: 36),
                 ),
               ],
@@ -69,9 +72,11 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _confirmLocation,
-        label: Text("Confirm"),
+        label: Text("Confirm",style: TextStyle(
+          fontSize: 18.sp,fontWeight: FontWeight.w600
+        ),),
         backgroundColor: Colors.green,
-        icon: Icon(Icons.check),
+        extendedPadding: EdgeInsets.all(16),
       ),
     );
   }

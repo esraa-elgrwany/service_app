@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:service_app/features/service/add_service/data/models/category_model.dart';
 import 'package:service_app/features/service/add_service/data/models/document_model.dart';
@@ -20,12 +22,12 @@ abstract class AddServiceRepo{
   Future<Either<Failures,StatesModel>>? getStates({ required int governmentId});
   Future<Either<Failures,VillageModel>>? getVillages({ required int stateId});
   Future<Either<Failures,DocumentModel>>? getDocument({ required int serviceTypeId});
-  Future<Either<Failures,UserModel>>? getUser();
   Future<Either<Failures,SubmitServiceModel>>? submitService({
     required int categoryId,
     required int subCategoryId,
     required int serviceTypeId,
     required String description,
     required Map<String, dynamic> fieldsData,
+    //List<File>? files,
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,8 +51,9 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
   final TextEditingController idController = TextEditingController();
   final TextEditingController referenceController = TextEditingController();
    String? location;
-  PlatformFile? uploadedFile;
-
+  String? locationAddress;
+  List<PlatformFile> uploadedFiles = [];
+  List<File> selectedFiles = [];
   @override
   void initState() {
     super.initState();
@@ -86,15 +89,15 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
       body: BlocProvider(
         create: (context) => AddServiceCubit()
           ..getFields(serviceId: serviceTypeId)
-          ..getDocument(serviceId: serviceTypeId)
-          ..getUser(),
+          ..getDocument(serviceId: serviceTypeId),
         child: BlocBuilder<AddServiceCubit, AddServiceState>(
           builder: (context, state) {
             final documents = context.read<AddServiceCubit>().document;
             final fields = context.read<AddServiceCubit>().fields;
-            final user = context.read<AddServiceCubit>().user;
             if (fields.length < 7) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(
+                color: Colors.green,
+              ));
             }
             bool isLoading = state is SubmitServiceLoading;
             return Stack(
@@ -118,7 +121,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                               children: [
                                 TextFormWidget(
                                   controller: nameController,
-                                  hint: user.userName ?? "",
+                                  hint:nameController.text,
                                   maxLine: 1,
                                   icon: Icons.person,
                                   readOnly: true,
@@ -127,7 +130,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
                                   controller: idController,
-                                  hint: user.nationalId ?? "",
+                                  hint:idController.text,
                                   maxLine: 1,
                                   readOnly: true,
                                   icon: Icons.card_membership,
@@ -136,7 +139,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
                                   controller: _phoneController,
-                                  hint: user.phone ?? "",
+                                  hint:_phoneController.text,
                                   icon: Icons.phone,
                                   validateTxt: "Required",
                                   maxLine: 1,
@@ -219,15 +222,17 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                             builder: (_) => MapPickerScreen()),
                                       );
                                       if (result != null &&
-                                          result['address'] != null) {
+                                          result['link'] != null) {
                                         setState(() {
                                           location =
-                                              result['address'];
+                                              result['link'];
+                                          locationAddress =
+                                          result['address'];
                                         });
                                       }
                                     },
                                     child: DropDownContainer(
-                                      text:location==null?"Location":location??"no location",
+                                      text:locationAddress==null?"Location":locationAddress??"no location",
                                       isLocation: true,
                                     ),
                                   ),
@@ -245,7 +250,6 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                       "Required documents:",
                                       style: TextStyle(
                                         fontSize: 16.sp,
-                                        color: Colors.black87,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -265,14 +269,13 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                           Icon(
                                             Icons.file_copy_outlined,
                                             size: 24.sp,
-                                            color: primaryColor,
+                                            color: Theme.of(context).colorScheme.primary,
                                           ),
                                           SizedBox(width: 4.w),
                                           Text(
                                             doc.name ?? "Unnamed Document",
                                             style: TextStyle(
                                               fontSize: 16.sp,
-                                              color: Colors.black87,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -305,22 +308,26 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         vertical: 12),
                                   ),
                                 ),
-                                if (uploadedFile != null)
+                                if (uploadedFiles.isNotEmpty)
                                   Padding(
                                     padding: EdgeInsets.only(top: 12.h),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.insert_drive_file,
-                                            size: 24.sp, color: primaryColor),
-                                        SizedBox(width: 8.w),
-                                        Expanded(
-                                          child: Text(
-                                            uploadedFile!.name,
-                                            style: TextStyle(fontSize: 14.sp),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: uploadedFiles.map((file) {
+                                        return Row(
+                                          children: [
+                                            Icon(Icons.insert_drive_file, size: 24.sp, color: Theme.of(context).colorScheme.primary),
+                                            SizedBox(width: 8.w),
+                                            Expanded(
+                                              child: Text(
+                                                file.name,
+                                                style: TextStyle(fontSize: 14.sp),
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }).toList(),
                                     ),
                                   ),
                                 SizedBox(height: 16.h),
@@ -349,7 +356,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                                 },
                                                 child: Text("okay",
                                                     style: TextStyle(
-                                                        color: Colors.white))),
+                                                       fontSize: 18.sp))),
                                           ],
                                         ),
                                       );
@@ -421,6 +428,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         print("serviceTypeId:$serviceTypeId");
                                         print("from date$fromDate");
                                         print("from date$toDate");
+                                        print("location$location");
                                         if (_formKey.currentState!.validate() &&
                                             validateDynamicFields(fields)) {
                                           AddServiceCubit.get(context)
@@ -431,6 +439,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                             description:
                                                 _descriptionController.text,
                                             fieldsData: fieldsData,
+                                           // files: selectedFiles,
                                           );
                                         }
                                       },
@@ -572,26 +581,16 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
   }
 
   Future<void> _pickFile() async {
-    try {
-      final result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.any,
-      );
+    final result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
-      if (result != null && result.files.isNotEmpty) {
-        setState(() {
-          uploadedFile = result.files.first;
-        });
-
-        debugPrint("File Name: ${uploadedFile!.name}");
-        debugPrint("File Path: ${uploadedFile!.path}");
-      } else {
-        debugPrint("User canceled file picker.");
-      }
-    } catch (e) {
-      debugPrint("File picker error: $e");
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        selectedFiles = result.paths.map((path) => File(path!)).toList();
+        uploadedFiles = result.files;
+      });
     }
   }
+
 
   Widget buildDatePickerField(String label, String? value, VoidCallback onTap) {
     return InkWell(
@@ -599,7 +598,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         decoration: BoxDecoration(
-          color: greyColor,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: greyColor),
         ),

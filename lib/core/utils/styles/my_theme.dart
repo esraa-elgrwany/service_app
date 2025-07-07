@@ -6,7 +6,7 @@ class MyThemeData{
   static ThemeData lightTheme=ThemeData(
       colorScheme: ColorScheme(
           brightness: Brightness.light,
-          primary:primaryColor, onPrimary:Colors.white, secondary: secondPrimary,
+          primary:primaryColor, onPrimary:Colors.white, secondary:greyColor,
           onSecondary:thirdPrimary, error: Colors.red, onError:Colors.white,
           background:Colors.white,
           onBackground: Colors.grey[100],
@@ -29,7 +29,7 @@ class MyThemeData{
   static ThemeData darkTheme=ThemeData(
       colorScheme: ColorScheme(
           brightness: Brightness.dark,
-          primary:Colors.white, onPrimary: Colors.white, secondary:darkGrey,
+          primary:Colors.white, onPrimary: Colors.white, secondary:Colors.grey,
           onSecondary:Colors.white, error: Colors.red, onError:Colors.white,
           background:darkGrey,
           onBackground:darkGrey,

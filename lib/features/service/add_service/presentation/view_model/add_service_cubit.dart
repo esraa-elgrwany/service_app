@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -9,7 +11,6 @@ import 'package:service_app/features/service/add_service/data/models/service_typ
 import 'package:service_app/features/service/add_service/data/models/states_model.dart';
 import 'package:service_app/features/service/add_service/data/models/sub_category_model.dart';
 import 'package:service_app/features/service/add_service/data/models/submit_service_model.dart';
-import 'package:service_app/features/service/add_service/data/models/user_model.dart';
 import 'package:service_app/features/service/add_service/data/models/village_model.dart';
 import 'package:service_app/features/service/add_service/data/repo/add_service_repo_impl.dart';
 import '../../../../../core/api_services/api-manager.dart';
@@ -27,7 +28,6 @@ class AddServiceCubit extends Cubit<AddServiceState> {
   List<StatesResult> states=[];
   List<VillageResult> village=[];
   List<DocumentTypes> document=[];
-  User user=User();
   static AddServiceCubit get(context) => BlocProvider.of(context);
   AddServiceCubit() : super(AddServiceInitial());
 
@@ -155,36 +155,20 @@ class AddServiceCubit extends Cubit<AddServiceState> {
     });
   }
 
-  void getUser() async{
-    emit(GetUserLoading());
-    ApiManager apiManager=ApiManager();
-    AddServiceRepo addServiceRepo =AddServiceRepoImpl(apiManager);
-    var res=await addServiceRepo.getUser();
-    res?.fold((l) {
-      print("User error++++++++++++++++++++++++++************************+${l.errorMsg}");
-      emit(GetUserError(l));
-    }, (r) {
-      final userData = r.result?.user;
-      if (userData != null) {
-        user = User.fromJson(userData);
-      emit(GetUserSuccess(r));
-      }
-      print("User success++++++++++++++++++++++++++************************+${r.result}");
-    });
-  }
-
   void submitService({
     required int categoryId,
     required int subCategoryId,
     required int serviceTypeId,
     required String description,
     required Map<String, dynamic> fieldsData,
+    //List<File>? files
   }) async{
     emit(SubmitServiceLoading());
     ApiManager apiManager=ApiManager();
     AddServiceRepo addServiceRepo =AddServiceRepoImpl(apiManager);
     var res=await addServiceRepo. submitService(categoryId:categoryId ,subCategoryId: subCategoryId,serviceTypeId: serviceTypeId
-    ,description: description,fieldsData: fieldsData);
+    ,description: description,fieldsData: fieldsData//files: files
+    );
     res?.fold((l) {
       print("submit Service error++++++++++++++++++++++++++************************+${l.errorMsg}");
       emit(SubmitServiceError(l));

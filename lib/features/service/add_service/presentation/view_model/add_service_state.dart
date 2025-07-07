@@ -115,19 +115,6 @@ class GetDocumentError extends AddServiceState {
   GetDocumentError(this.failures);
 }
 
-//Get User
-
-class GetUserLoading extends AddServiceState {}
-
-class GetUserSuccess extends AddServiceState {
-  UserModel model;
-  GetUserSuccess(this.model);
-}
-
-class GetUserError extends AddServiceState {
-  Failures failures;
-  GetUserError(this.failures);
-}
 
 //Submit Service
 

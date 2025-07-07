@@ -232,6 +232,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                             CacheData.saveId(data: state.model.userName??"", key: "name");
                                             CacheData.saveId(data: state.model.nationalId??"", key: "nationalId");
                                             CacheData.saveId(data: state.model.phone??"", key: "phone");
+                                            print("verify model:${state.model}");
+                                            print("phone:${state.model.phone}");
                                             Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(builder: (context) => HomeScreen()),

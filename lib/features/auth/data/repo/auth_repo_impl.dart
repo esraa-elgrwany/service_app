@@ -14,7 +14,8 @@ class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl(this.apiManager);
 
   @override
-  Future<Either<Failures, SendOtpModel>>? sendOtp({required String phone}) async {
+  Future<Either<Failures, SendOtpModel>>? sendOtp(
+      {required String phone}) async {
     try {
       Response response = await apiManager.postData(
         EndPoints.sendOtp,
@@ -33,45 +34,57 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failures,VerifyOtpSuccessModel>> verifyOtp(
-      {required String phone,required String otp}) async {
+  Future<Either<Failures, VerifyOtpSuccessModel>> verifyOtp(
+      {required String phone, required String otp}) async {
     try {
       final response = await apiManager.postData(
         EndPoints.verifyOtp,
         body: {"phone": phone, "otp": otp},
       );
-      VerifyOtpSuccessModel model = VerifyOtpSuccessModel.fromJson(response.data);
+      VerifyOtpSuccessModel model =
+          VerifyOtpSuccessModel.fromJson(response.data);
       print("Response Data: ${response.data}");
       return Right(model);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure(e.message ?? "Failed to send OTP"));
-      } else {
-        return left(ServerFailure("Something went wrong"));
-      }
-    }
+    } on DioException catch (e) {
+      final responseData = e.response?.data;
+      final statusCode = e.response?.statusCode;
 
+      if (statusCode == 401 &&
+          responseData is Map &&
+          responseData['message'] != null) {
+        final message = responseData['message'];
+        return Left(ServerFailure(message)); // "Signup required"
+      }
+
+      return Left(ServerFailure(e.message ?? "Failed to verify OTP"));
+    } catch (_) {
+      return Left(ServerFailure("Something went wrong"));
+    }
   }
 
   @override
-  Future<Either<Failures,SignUpSuccessModel>>? register({required String phone, required String name, required String id,
-    required String expiryDate, required String address}) async{
+  Future<Either<Failures, SignUpSuccessModel>>? register(
+      {required String phone,
+      required String name,
+      required String id,
+      required String expiryDate,
+      required String address}) async {
     try {
       final response = await apiManager.postData(
         EndPoints.signUp,
-        body: {"phone": phone,
+        body: {
+          "phone": phone,
           "name": name,
           "national_id": id,
           "national_id_expiry": expiryDate,
           "address": address
         },
       );
-      SignUpSuccessModel model =SignUpSuccessModel.fromJson(response.data);
+      SignUpSuccessModel model = SignUpSuccessModel.fromJson(response.data);
       print("Response Data: ${response.data}");
       return Right(model);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
-    }
-
   }
+}

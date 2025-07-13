@@ -26,14 +26,10 @@ class VerifyOtpSuccessState extends AuthState {
 }
 
 class VerifyOtpErrorState extends AuthState {
-  final String errorMessage;
-  VerifyOtpErrorState(this.errorMessage);
+  Failures failures;
+  VerifyOtpErrorState(this.failures);
 }
 
-class VerifyOtpSignupRequiredState extends AuthState {
-  final String phone;
-  VerifyOtpSignupRequiredState(this.phone);
-}
 
 //register
 class SignUpLoading extends AuthState {}
@@ -44,6 +40,6 @@ class SignUpSuccessState extends AuthState {
 }
 
 class SignUpErrorState extends AuthState {
-  final String errorMessage;
-  SignUpErrorState(this.errorMessage);
+  Failures failures;
+  SignUpErrorState(this.failures);
 }

@@ -13,7 +13,7 @@ class DropDownContainer extends StatelessWidget{
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color:Theme.of(context).colorScheme.secondary,
-        border: Border.all(color:greyColor),
+        border: Border.all(color:Theme.of(context).colorScheme.secondary,),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(

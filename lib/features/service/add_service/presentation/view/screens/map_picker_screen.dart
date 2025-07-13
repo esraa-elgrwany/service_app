@@ -54,7 +54,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
         ),
         children: [
           TileLayer(
-            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            urlTemplate: "https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=8CYQHrSMkQmkKENk7ZeY",
             userAgentPackageName: 'com.example.app',
           ),
           if (_selectedLatLng != null)
@@ -70,13 +70,21 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
             ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _confirmLocation,
-        label: Text("Confirm",style: TextStyle(
-          fontSize: 18.sp,fontWeight: FontWeight.w600
-        ),),
-        backgroundColor: Colors.green,
-        extendedPadding: EdgeInsets.all(16),
+      floatingActionButton: InkWell(
+        onTap: _confirmLocation,
+        child: Container(
+          width: 120.w,
+          height: 56.h,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),color: Colors.green
+          ),
+          child: Center(
+            child: Text("Confirm",style: TextStyle(
+              fontSize: 18.sp,fontWeight: FontWeight.w600
+            ),),
+          ),
+        ),
       ),
     );
   }

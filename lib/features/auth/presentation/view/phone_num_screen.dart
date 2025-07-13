@@ -82,7 +82,7 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 8.h,
+                                    height: 12.h,
                                   ),
                                   TextFormNum(
                                       controller: phoneController,
@@ -91,7 +91,7 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                                       validateTxt:
                                           "please enter your phone number"),
                                   SizedBox(
-                                    height: 8.h,
+                                    height:16.h,
                                   ),
                                   Text(
                                     "Enter 8 digits without the country code..",
@@ -103,7 +103,7 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 40.h,
+                                    height: 32.h,
                                   ),
                                   BlocConsumer<AuthCubit, AuthState>(
                                     listener: (context, state) {

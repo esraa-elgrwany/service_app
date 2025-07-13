@@ -36,19 +36,19 @@ class TextFormNum extends StatelessWidget{
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              color:  greyColor,
+              color:Theme.of(context).colorScheme.secondary,
             )),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              color:  greyColor,
+              color:Theme.of(context).colorScheme.secondary,
             )),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: greyColor)),
+            borderSide: BorderSide(color:Theme.of(context).colorScheme.secondary,)),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: greyColor)),
+            borderSide: BorderSide(color:Theme.of(context).colorScheme.secondary,)),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

@@ -31,8 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final args = ModalRoute.of(context)!.settings.arguments as String;
-      phoneController.text = args;
+      phoneController.text = CacheData.getData(key: "phone");
       setState(() {});
     });
   }
@@ -195,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 TextStyle(color: primaryColor),
                                           ),
                                           content: Text(
-                                            state.errorMessage,
+                                            state.failures.errorMsg,
                                             style:
                                                 TextStyle(color: primaryColor,fontSize: 16.sp),
                                           ),
@@ -236,6 +235,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               vertical: 12, horizontal: 4),
                                         ),
                                       );
+                                      CacheData.saveId(data: state.model.userId??0, key: "userId");
+                                      CacheData.saveId(data: state.model.userName??"", key: "name");
+                                      CacheData.saveId(data: state.model.nationalId??"", key: "nationalId");
+                                      CacheData.saveId(data: state.model.phone??"", key: "phone");
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(

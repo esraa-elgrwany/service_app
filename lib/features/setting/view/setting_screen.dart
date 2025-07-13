@@ -7,6 +7,8 @@ import 'package:service_app/features/auth/presentation/view/phone_num_screen.dar
 import 'package:service_app/features/setting/model_view/setting_cubit.dart';
 import 'package:service_app/l10n/app_localizations.dart';
 
+import '../../../core/api_services/api-manager.dart';
+
 class SettingScreen extends StatefulWidget {
   static const String routeName = "settingScreen";
   const SettingScreen({super.key});
@@ -230,7 +232,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             ),
                             Spacer(),
                             InkWell(
-                                onTap: () {
+                                onTap: () async{
                                   CacheData.removeData("userId");
                                   CacheData.removeData("phone");
                                   CacheData.removeData("name");

@@ -12,7 +12,6 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final news = NewsCubit.get(context).news;
-
     if (news.isEmpty || index >= news.length) {
       return Center(
         child: Text(
@@ -39,12 +38,12 @@ class NewsItem extends StatelessWidget {
                   "${Constants.baseUrl}${news[index].image}",
                   height: 160.h,
                   width: double.infinity,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       width: double.infinity,
                       height: 200.h,
-                      color: Colors.grey.shade200,
+                      color: Colors.grey.shade400,
                       alignment: Alignment.center,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -56,6 +55,7 @@ class NewsItem extends StatelessWidget {
                             "Image failed to load",
                             style: TextStyle(
                               fontSize: 14.sp,
+                              color: Colors.black
                             ),
                           ),
                         ],

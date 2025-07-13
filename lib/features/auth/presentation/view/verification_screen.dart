@@ -185,32 +185,47 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                       listener: (context, state) {
                                         {
                                           if (state is VerifyOtpErrorState) {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) => AlertDialog(
-                                                backgroundColor: Colors.grey[200],
-                                                title: Text(
-                                                  "Error",
-                                                  style: TextStyle(color: primaryColor),
+                                            final msg = state.failures.errorMsg.toLowerCase();
+
+                                            if (msg.contains("signup required")) {
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) => SignUpScreen(),
                                                 ),
-                                                content: Text(
-                                                  state.errorMessage,
-                                                  style: TextStyle(color: primaryColor,fontSize: 16.sp),
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Text(
-                                                      "Okay",
-                                                      style: TextStyle(color:primaryColor),
+                                              );
+                                            }else {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                      backgroundColor: Colors
+                                                          .grey[200],
+                                                      title: Text(
+                                                        "Error",
+                                                        style: TextStyle(
+                                                            color: primaryColor),
+                                                      ),
+                                                      content: Text(
+                                                        state.failures.errorMsg,
+                                                        style: TextStyle(
+                                                            color: primaryColor,
+                                                            fontSize: 16.sp),
+                                                      ),
+                                                      actions: [
+                                                        ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text(
+                                                            "Okay",
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          } else if (state is VerifyOtpSuccessState) {
+                                              );
+                                            } } else if (state is VerifyOtpSuccessState) {
                                             ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(
                                                 content: Text(
@@ -238,7 +253,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                               context,
                                               MaterialPageRoute(builder: (context) => HomeScreen()),
                                             );
-                                          } else if (state is VerifyOtpSignupRequiredState) {
+                                          } /*else if (state is VerifyOtpSignupRequiredState) {
                                             showDialog(
                                               context: context,
                                               builder: (context) => AlertDialog(
@@ -271,7 +286,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                                 ],
                                               ),
                                             );
-                                          }
+                                          }*/
                                         }
                                       },
                                       builder: (context, state) {

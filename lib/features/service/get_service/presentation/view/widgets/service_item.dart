@@ -60,7 +60,7 @@ class ServiceItem extends StatelessWidget{
                   style:  TextStyle(color: Colors.grey,fontSize: 16.sp),
                 ),
                 SizedBox(width:4.w,),
-                Icon(Icons.date_range_outlined,color: primaryColor,size: 22.sp,),
+                Icon(Icons.date_range_outlined,color:Theme.of(context).colorScheme.primary,size: 22.sp,),
 
               ],
             ),

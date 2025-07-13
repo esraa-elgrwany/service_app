@@ -16,6 +16,7 @@ import 'package:service_app/features/service/add_service/presentation/view/scree
 import 'package:service_app/features/service/get_service/presentation/view/screens/view_service_screen.dart';
 import 'package:service_app/features/setting/model_view/setting_cubit.dart';
 import 'package:service_app/features/setting/view/setting_screen.dart';
+import 'core/api_services/api-manager.dart';
 import 'features/home/presentation/view/screens/home_screen.dart';
 import 'features/news/presentation/view/screens/news_details_screen.dart';
 import 'features/news/presentation/view/screens/news_screen.dart';
@@ -25,6 +26,7 @@ import 'l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  await ApiManager.init();
   await CacheData.init();
   String start;
   int? userId = CacheData.getData(key: "userId");

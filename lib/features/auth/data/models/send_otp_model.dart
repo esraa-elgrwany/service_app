@@ -16,5 +16,8 @@ class SendOtpModel {
     map['user_exists'] = userExists;
     return map;
   }
-
+  @override
+  String toString() {
+    return 'SendOtpModel(success: $success, userExists: $userExists)';
+  }
 }

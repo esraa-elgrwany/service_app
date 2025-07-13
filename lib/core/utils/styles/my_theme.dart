@@ -29,7 +29,7 @@ class MyThemeData{
   static ThemeData darkTheme=ThemeData(
       colorScheme: ColorScheme(
           brightness: Brightness.dark,
-          primary:Colors.white, onPrimary: Colors.white, secondary:Colors.grey,
+          primary:Colors.white, onPrimary: Colors.white, secondary:Colors.white,
           onSecondary:Colors.white, error: Colors.red, onError:Colors.white,
           background:darkGrey,
           onBackground:darkGrey,

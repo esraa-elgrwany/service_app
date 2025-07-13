@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:service_app/core/api_services/api-manager.dart';
 import 'package:service_app/core/api_services/end_points.dart';
 import 'package:service_app/core/failures/failures.dart';
-import 'package:service_app/core/utils/constants.dart';
 import 'package:service_app/features/service/add_service/data/models/category_model.dart';
 import 'package:service_app/features/service/add_service/data/models/document_model.dart';
 import 'package:service_app/features/service/add_service/data/models/get_fields_model.dart';
@@ -16,13 +16,13 @@ import 'package:service_app/features/service/add_service/data/models/submit_serv
 import 'package:service_app/features/service/add_service/data/models/village_model.dart';
 import 'package:service_app/features/service/add_service/data/repo/add_service_repo.dart';
 
-class AddServiceRepoImpl implements AddServiceRepo{
+class AddServiceRepoImpl implements AddServiceRepo {
   ApiManager apiManager;
 
   AddServiceRepoImpl(this.apiManager);
 
   @override
-  Future<Either<Failures, CategoryModel>>? getCategory() async{
+  Future<Either<Failures, CategoryModel>>? getCategory() async {
     try {
       Response response = await apiManager.getData(
         EndPoints.getCategories,
@@ -41,7 +41,8 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, ServiceTypeModel>>? getServiceType({required int subCategoryId}) async{
+  Future<Either<Failures, ServiceTypeModel>>? getServiceType(
+      {required int subCategoryId}) async {
     try {
       Response response = await apiManager.getData(
         EndPoints.serviceType(subCategoryId),
@@ -60,7 +61,8 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, SubCategoryModel>>? getSubCategory({required int categoryId}) async{
+  Future<Either<Failures, SubCategoryModel>>? getSubCategory(
+      {required int categoryId}) async {
     try {
       Response response = await apiManager.getData(
         EndPoints.subCategories(categoryId),
@@ -79,7 +81,8 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, GetFieldsModel>>? getFields({required int serviceTypeId}) async{
+  Future<Either<Failures, GetFieldsModel>>? getFields(
+      {required int serviceTypeId}) async {
     try {
       Response response = await apiManager.getData(
         EndPoints.getFields(serviceTypeId),
@@ -98,7 +101,8 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, DocumentModel>>? getDocument({required int serviceTypeId}) async{
+  Future<Either<Failures, DocumentModel>>? getDocument(
+      {required int serviceTypeId}) async {
     try {
       Response response = await apiManager.getData(
         EndPoints.getDocuments(serviceTypeId),
@@ -117,7 +121,7 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, GovernmentModel>>? getGovernments() async{
+  Future<Either<Failures, GovernmentModel>>? getGovernments() async {
     try {
       Response response = await apiManager.getData(
         EndPoints.getGovern,
@@ -136,7 +140,8 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, StatesModel>>? getStates({required int governmentId}) async{
+  Future<Either<Failures, StatesModel>>? getStates(
+      {required int governmentId}) async {
     try {
       Response response = await apiManager.getData(
         EndPoints.getStates(governmentId),
@@ -155,7 +160,8 @@ class AddServiceRepoImpl implements AddServiceRepo{
   }
 
   @override
-  Future<Either<Failures, VillageModel>>? getVillages({required int stateId}) async{
+  Future<Either<Failures, VillageModel>>? getVillages(
+      {required int stateId}) async {
     try {
       Response response = await apiManager.getData(
         EndPoints.getVillage(stateId),
@@ -173,12 +179,14 @@ class AddServiceRepoImpl implements AddServiceRepo{
     }
   }
 
-
   @override
-  Future<Either<Failures, SubmitServiceModel>>? submitService({required int categoryId, required int subCategoryId,
-    required int serviceTypeId, required String description, required Map<String, dynamic> fieldsData})async {
-    final dio = Dio();
-
+  Future<Either<Failures, SubmitServiceModel>>? submitService(
+      {required int categoryId,
+      required int subCategoryId,
+      required int serviceTypeId,
+      required String description,
+      required Map<String, dynamic> fieldsData,
+      List<File>? files}) async {
     try {
       final payload = {
         "category_id": categoryId,
@@ -187,50 +195,13 @@ class AddServiceRepoImpl implements AddServiceRepo{
         "description": description,
         "fields_data": fieldsData,
       };
-
-      final formData = FormData.fromMap({
-        "payload_json": jsonEncode(payload),
-      });
-
-      final response = await dio.post(
-        Constants.baseUrl + EndPoints.createServices,
-        data: formData,
-      );
-      SubmitServiceModel model = SubmitServiceModel.fromJson(response.data);
-      print("Submit Service data: ${response.data}");
-      return Right(model);
-    } catch (e) {
-  if (e is DioException) {
-  print("🧨 Dio error response: ${e.response?.data}");
-  print("🧨 Dio error status code: ${e.response?.statusCode}");
-  return left(ServerFailure(e.response?.data.toString() ?? "Failed"));
-  } else {
-  return left(ServerFailure("Something went wrong"));
-  }
-  }
-
-}
-  /*@override
-  Future<Either<Failures, SubmitServiceModel>>? submitService({required int categoryId, required int subCategoryId,
-    required int serviceTypeId, required String description, required Map<String, dynamic> fieldsData,List<File>? files})async {
-    final dio = Dio();
-
-    try {
-      final payload = {
-        "category_id": categoryId,
-        "sub_category_id": subCategoryId,
-        "service_type_id": serviceTypeId,
-        "description": description,
-        "fields_data": fieldsData,
-      };
-      final formData = FormData.fromMap({
-        "payload_json": jsonEncode(payload),
-      });
-      /*final formData = FormData();
+      final formData = FormData();
 
       formData.fields.add(MapEntry("payload_json", jsonEncode(payload)));
-
-     if (files != null && files.isNotEmpty) {
+      /*final formData = FormData.fromMap({
+        "payload_json": jsonEncode(payload),
+      });*/
+      if (files != null && files.isNotEmpty) {
         for (var file in files) {
           final fileName = file.path.split("/").last;
           formData.files.add(MapEntry(
@@ -239,10 +210,57 @@ class AddServiceRepoImpl implements AddServiceRepo{
           ));
         }
       }
+      Response response = await apiManager.postData(
+        EndPoints.createServices,
+        body: formData,
+      );
+      SubmitServiceModel model = SubmitServiceModel.fromJson(response.data);
+      print("Submit Service data: ${response.data}");
+      return Right(model);
+    } catch (e) {
+      if (e is DioException) {
+        print("🧨 Dio error response: ${e.response?.data}");
+        print("🧨 Dio error status code: ${e.response?.statusCode}");
+        return left(ServerFailure(e.response?.data.toString() ?? "Failed"));
+      } else {
+        return left(ServerFailure("Something went wrong"));
+      }
+    }
+  }
+/*@override
+  Future<Either<Failures, SubmitServiceModel>>? submitService({required int categoryId, required int subCategoryId,
+    required int serviceTypeId, required String description, required Map<String, dynamic> fieldsData,List<File>? files})async {
+    final dio = apiManager.dio;
+
+    try {
+      final payload = {
+        "category_id": categoryId,
+        "sub_category_id": subCategoryId,
+        "service_type_id": serviceTypeId,
+        "description": description,
+        "fields_data": fieldsData,
+      };
+      final formData = FormData.fromMap({
+        "payload_json": jsonEncode(payload),
+      });
+      final formData = FormData();
+
+      formData.fields.add(MapEntry("payload_json", jsonEncode(payload)));
+
+
+     if (files != null && files.isNotEmpty) {
+  for (var file in files) {
+    final fileName = file.path.split("/").last;
+    formData.files.add(MapEntry(
+      "files",
+      await MultipartFile.fromFile(file.path, filename: fileName),
+    ));
+  }
+
 final response = await dio.post(
         Constants.baseUrl + EndPoints.createServices,
         data: formData,
-      );*/
+      );
       final response = await dio.post(
         Constants.baseUrl + EndPoints.createServices,
         data: formData,
@@ -262,5 +280,4 @@ final response = await dio.post(
       }
     }
   }*/
-
 }

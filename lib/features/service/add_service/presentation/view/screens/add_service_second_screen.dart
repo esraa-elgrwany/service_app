@@ -429,6 +429,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         print("from date$fromDate");
                                         print("from date$toDate");
                                         print("location$location");
+                                        print("files$selectedFiles");
                                         if (_formKey.currentState!.validate() &&
                                             validateDynamicFields(fields)) {
                                           AddServiceCubit.get(context)
@@ -439,7 +440,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                             description:
                                                 _descriptionController.text,
                                             fieldsData: fieldsData,
-                                           // files: selectedFiles,
+                                            files: selectedFiles,
                                           );
                                         }
                                       },
@@ -600,7 +601,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: greyColor),
+          border: Border.all(color:Theme.of(context).colorScheme.secondary),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -610,7 +611,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
-                color: Colors.black87,
+                color:Colors.black,
               ),
             ),
             Icon(

@@ -161,13 +161,13 @@ class AddServiceCubit extends Cubit<AddServiceState> {
     required int serviceTypeId,
     required String description,
     required Map<String, dynamic> fieldsData,
-    //List<File>? files
+    List<File>? files
   }) async{
     emit(SubmitServiceLoading());
     ApiManager apiManager=ApiManager();
     AddServiceRepo addServiceRepo =AddServiceRepoImpl(apiManager);
     var res=await addServiceRepo. submitService(categoryId:categoryId ,subCategoryId: subCategoryId,serviceTypeId: serviceTypeId
-    ,description: description,fieldsData: fieldsData//files: files
+    ,description: description,fieldsData: fieldsData,files: files
     );
     res?.fold((l) {
       print("submit Service error++++++++++++++++++++++++++************************+${l.errorMsg}");

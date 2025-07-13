@@ -28,6 +28,6 @@ abstract class AddServiceRepo{
     required int serviceTypeId,
     required String description,
     required Map<String, dynamic> fieldsData,
-    //List<File>? files,
+    List<File>? files,
   });
 }

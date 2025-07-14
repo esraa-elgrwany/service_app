@@ -253,40 +253,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                               context,
                                               MaterialPageRoute(builder: (context) => HomeScreen()),
                                             );
-                                          } /*else if (state is VerifyOtpSignupRequiredState) {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) => AlertDialog(
-                                                backgroundColor: Colors.grey[200],
-                                                title: Text(
-                                                  "Signup Required",
-                                                  style: TextStyle(color: primaryColor,fontSize: 18.sp),
-                                                ),
-                                                content: Text(
-                                                  "Your number is not registered. Please sign up to continue.",
-                                                  style: TextStyle(color: primaryColor,fontSize: 16.sp),
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context); // Close the dialog
-                                                      Navigator.pushNamed(
-                                                        context,
-                                                        SignUpScreen.routeName,
-                                                        arguments: state.phone,
-                                                      );
-                                                    },
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Proceed to Sign Up",
-                                                        style: TextStyle(color: primaryColor,fontSize: 16.sp),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          }*/
+                                          }
                                         }
                                       },
                                       builder: (context, state) {
@@ -306,22 +273,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               ],
                             ),
                           ),
-                        ),
-                        SizedBox(height: 40.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Resend OTP code?",
-                              style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),

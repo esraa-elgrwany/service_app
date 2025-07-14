@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/add_service/data/models/government_model.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class GovernDialog extends StatefulWidget{
   final Function(GovernmentResult government) onGovernmentSelected;
@@ -39,7 +40,7 @@ class _GovernDialogState extends State<GovernDialog> {
           )
               : */
           Text(
-            "Select Government",
+            AppLocalizations.of(context)!.selectGovern,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           /* IconButton(

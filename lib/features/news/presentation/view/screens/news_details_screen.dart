@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/core/utils/constants.dart';
 import 'package:service_app/features/news/presentation/view_model/news_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class NewsDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'News Details',
+          AppLocalizations.of(context)!.newsDetails,
           style: GoogleFonts.montserrat(
               fontWeight: FontWeight.w600, fontSize: 22.sp),
         ),
@@ -56,12 +57,13 @@ class NewsDetailsScreen extends StatelessWidget {
                             child: Image.network(
                               "${Constants.baseUrl}${newsItem?.image}",
                               height: 180.h,
-                              fit: BoxFit.cover,
+                              width: MediaQuery.of(context).size.width-32.w,
+                              fit: BoxFit.contain,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
-                                  width: double.infinity,
+                                  width: MediaQuery.of(context).size.width-32.w,
                                   height: 200.h,
-                                  color: Colors.grey.shade200,
+                                  color: Colors.grey.shade400,
                                   alignment: Alignment.center,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -73,6 +75,7 @@ class NewsDetailsScreen extends StatelessWidget {
                                         "Image failed to load",
                                         style: TextStyle(
                                           fontSize: 14.sp,
+                                          color: Colors.black
                                         ),
                                       ),
                                     ],
@@ -133,10 +136,10 @@ class NewsDetailsScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "View Full Article",
+                                  AppLocalizations.of(context)!.viewArticle,
                                   style: GoogleFonts.poppins(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 IconButton(

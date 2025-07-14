@@ -9,37 +9,73 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get login => 'تسجيل الدخول';
+  String get signIn => 'تسجيل الدخول';
+
+  @override
+  String get phoneNum => 'رقم الهاتف';
+
+  @override
+  String get phoneValid => 'أدخل رقم الهاتف';
+
+  @override
+  String get sendVerCode => 'أرسل رمز التحقق';
+
+  @override
+  String get enterCodeHint => 'أدخل ٨ أرقام بدون كود الدولة..';
+
+  @override
+  String get verification => 'تحقق';
+
+  @override
+  String get enterOtp => 'أدخل رمز OTP المرسل إلى رقمك';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get signUp => 'تسجيل';
+
+  @override
+  String get createNewAcc => 'إنشاء حساب جديد';
 
   @override
   String get logout => 'تسجيل الخروج';
 
   @override
-  String get hello => 'اهلا,';
+  String get welcome => 'مرحباً';
 
   @override
-  String get enterUserPass => 'ادخل اسم المستخدم و كلمة السر';
+  String get name => 'الإسم';
 
   @override
-  String get welcome => 'مرحبا بك في تطبيقنا';
+  String get nameHint => 'الإسم';
 
   @override
-  String get passValid => 'ادخل كلمة السر';
+  String get nameValid => 'أدخل إسم المستخدم';
 
   @override
-  String get userName => 'اسم المستخدم';
+  String get idNum => 'رقم الهوية';
 
   @override
-  String get password => 'كلمة السر';
+  String get idValid => 'أدخل رقم الهوية';
 
   @override
-  String get usernameHint => 'ادخل اسم المستخدم';
+  String get iDExpiryDate => 'تاريخ إنتهاء الهوية';
 
   @override
-  String get passHint => 'ادخل كلمة السر';
+  String get required => 'مطلوب';
 
   @override
-  String get userValid => 'ادخل اسم المستخدم ';
+  String get address => 'العنوان';
+
+  @override
+  String get stage => 'المرحلة';
+
+  @override
+  String get addressHint => 'أدخل العنوان';
+
+  @override
+  String get location => 'الموقع';
 
   @override
   String get lang => 'اللغة الافتراضية';
@@ -66,131 +102,104 @@ class AppLocalizationsAr extends AppLocalizations {
   String get setting => 'الإعدادات';
 
   @override
+  String get mapBar => 'اختار الموقع علي الخريطة';
+
+  @override
+  String get optional => 'اختياري';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get serviceTypeId => 'الرقم التعريفي لنوع الخدمة';
+
+  @override
   String get services => 'الخدمات الالكترونية';
 
   @override
   String get news => 'الأخبار';
 
   @override
+  String get newsDetails => 'تفاصيل الأخبار';
+
+  @override
+  String get serviceDetails => 'تفاصيل الخدمات الالكترونية';
+
+  @override
+  String get viewArticle => 'عرض المقال كاملاً';
+
+  @override
   String get search => 'بحث';
-
-  @override
-  String get deleteCourse => 'حذف الكورس';
-
-  @override
-  String get areYouSureCourse => 'هل أنت متأكد أنك تريد حذف هذا الكورس؟';
-
-  @override
-  String get delete => 'حذف';
-
-  @override
-  String get cancel => 'إلغاء';
-
-  @override
-  String get name => 'الاسم';
-
-  @override
-  String get phone => 'رقم الهاتف';
-
-  @override
-  String get age => 'العمر';
-
-  @override
-  String get city => 'المدينة';
-
-  @override
-  String get batchNum => 'رقم الدفعة';
-
-  @override
-  String get gender => 'النوع';
-
-  @override
-  String get male => 'ذكر';
-
-  @override
-  String get female => 'انثي';
-
-  @override
-  String get work => 'يعمل';
-
-  @override
-  String get unWork => 'لا يعمل';
-
-  @override
-  String get workStatus => 'حالة العمل';
-
-  @override
-  String get paymentMethod => 'طريقة الدفع';
-
-  @override
-  String get cash => 'كاش';
-
-  @override
-  String get online => 'اونلاين';
-
-  @override
-  String get selectState => 'اختار المحافظة';
-
-  @override
-  String get selectStatus => 'اختار الحالة';
-
-  @override
-  String get selectHowKnow => 'اختار كيف تعرفنا';
-
-  @override
-  String get uploadImage => 'تحميل صورة';
-
-  @override
-  String get addNewCourse => 'إضافة كورس جديد';
-
-  @override
-  String get addCourse => 'إضافة كورس';
-
-  @override
-  String get deleteTask => 'حذف التاسك';
-
-  @override
-  String get areYouSureTask => 'هل أنت متأكد انك تريد حذف هذه التاسك؟';
 
   @override
   String get description => 'الوصف';
 
   @override
-  String get selectUser => 'اختار مستخدم';
+  String get govern => 'المحافظة';
 
   @override
-  String get selectPartner => 'اختار شريك';
+  String get selectGovern => 'إختار المحافظة';
 
   @override
-  String get selectProject => 'اختار مشروع';
+  String get state => 'الولاية';
 
   @override
-  String get addTask => 'إضافة تاسك';
+  String get selectState => 'إختار الولاية';
 
   @override
-  String get addNewTask => 'إضافة تاسك جديدة';
+  String get village => 'القرية';
 
   @override
-  String get courseDetails => 'تفاصيل الكورس';
+  String get selectVillage => 'إختار القرية';
 
   @override
-  String get taskDetails => 'تفاصيل التاسك';
+  String get reference => 'المرجع';
 
   @override
-  String get user => 'مستخدم';
+  String get fromDate => 'تاريخ البداية';
 
   @override
-  String get project => 'مشروع';
+  String get toDate => 'تاريخ النهاية';
 
   @override
-  String get partner => 'شريك';
+  String get requiredDoc => 'الوثائق المطلوبة';
 
   @override
-  String get state => 'المحافظة';
+  String get uploadFile => 'تحميل ملف';
 
   @override
-  String get status => 'الحالة';
+  String get submitRequest => 'تأكيد الطلب';
 
   @override
-  String get know => 'كيف تعرفنا';
+  String get mainCat => 'التصنيف الرئيسي';
+
+  @override
+  String get selectMainCat => 'إختار التصنيف الرئيسي';
+
+  @override
+  String get subCat => 'التصنيف الفرعي';
+
+  @override
+  String get selectSubCat => 'إختار التصنيف الفرعي';
+
+  @override
+  String get serviceType => 'نوع الخدمة';
+
+  @override
+  String get selectServiceType => 'إختار نوع الخدمة';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get addNewService => 'إضافة خدمة جديدة';
+
+  @override
+  String get createManage => 'إنشاء و إدارة خدمات جديدة';
+
+  @override
+  String get allServices => 'جميع الخدمات';
+
+  @override
+  String get viewServices => 'عرض وتعديل وحذف الخدمات';
 }

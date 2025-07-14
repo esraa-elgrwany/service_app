@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/core/utils/styles/colors.dart';
 import 'package:service_app/features/home/presentation/view/widgets/servive_card.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class ServiceScreen extends StatelessWidget{
   static const String routeName="serviceScreen";
@@ -13,7 +14,7 @@ class ServiceScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'E-Services',
+          AppLocalizations.of(context)!.services,
           style: GoogleFonts.montserrat(fontWeight: FontWeight.w600,fontSize: 22.sp),
         ),
         centerTitle: true,
@@ -25,8 +26,8 @@ class ServiceScreen extends StatelessWidget{
         child: Column(
           children: [
             ServiceCard(
-              title: 'Add New Service',
-              subtitle: 'Create and manage new services',
+              title: AppLocalizations.of(context)!.addNewService,
+              subtitle: AppLocalizations.of(context)!.createManage,
               icon: Icons.add_box_rounded,
               color:Colors.teal,
               onTap: () {
@@ -35,8 +36,8 @@ class ServiceScreen extends StatelessWidget{
             ),
             SizedBox(height: 24.h),
             ServiceCard(
-              title: 'All Services',
-              subtitle: 'View, edit, or delete services',
+              title: AppLocalizations.of(context)!.allServices,
+              subtitle: AppLocalizations.of(context)!.viewServices,
               icon: Icons.list_alt_rounded,
               color: primaryColor,
               onTap: () {

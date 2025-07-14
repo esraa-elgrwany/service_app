@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/add_service/data/models/village_model.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class VillageDialog extends StatefulWidget{
   final Function(VillageResult village) onVillageSelected;
@@ -39,7 +40,7 @@ class _VillageDialogState extends State<VillageDialog> {
           )
               : */
           Text(
-            "Select State",
+            AppLocalizations.of(context)!.selectVillage,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           /* IconButton(

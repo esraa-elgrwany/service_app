@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/add_service/data/models/sub_category_model.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 import '../../view_model/add_service_cubit.dart';
 
@@ -40,7 +41,7 @@ class _SubCategoryDialogState extends State<SubCategoryDialog> {
           )
               : */
           Text(
-            " Select Sub Category",
+            AppLocalizations.of(context)!.selectSubCat,
             style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
           ),
           /*IconButton(

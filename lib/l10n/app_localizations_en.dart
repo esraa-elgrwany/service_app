@@ -9,37 +9,73 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get login => 'Login';
+  String get signIn => 'Sign In';
+
+  @override
+  String get phoneNum => 'phone number';
+
+  @override
+  String get phoneValid => 'please enter your phone number';
+
+  @override
+  String get sendVerCode => 'Send Verification Code';
+
+  @override
+  String get enterCodeHint => 'Enter 8 digits without the country code..';
+
+  @override
+  String get verification => 'Verification';
+
+  @override
+  String get enterOtp => 'Enter the OTP code sent to your number';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get signUp => 'Sign Up';
+
+  @override
+  String get createNewAcc => 'Create new account';
 
   @override
   String get logout => 'Log out';
 
   @override
-  String get hello => 'Hello user,';
+  String get welcome => 'Welcome';
 
   @override
-  String get enterUserPass => 'Enter your username and password';
+  String get name => 'Name';
 
   @override
-  String get welcome => 'welcome to our app';
+  String get nameHint => 'Name';
 
   @override
-  String get passValid => 'Please enter your password';
+  String get nameValid => 'Please enter your username';
 
   @override
-  String get userName => 'Username';
+  String get idNum => 'ID number';
 
   @override
-  String get password => 'Password';
+  String get idValid => 'please enter your ID number';
 
   @override
-  String get usernameHint => 'username';
+  String get iDExpiryDate => 'ID expiry date';
 
   @override
-  String get passHint => 'password';
+  String get required => 'Required';
 
   @override
-  String get userValid => 'Please enter your userName';
+  String get address => 'Address';
+
+  @override
+  String get stage => 'Stage';
+
+  @override
+  String get addressHint => 'please enter your address';
+
+  @override
+  String get location => 'Location';
 
   @override
   String get lang => 'default Language';
@@ -66,131 +102,104 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setting => 'Settings';
 
   @override
+  String get mapBar => 'Select Location On Map';
+
+  @override
+  String get optional => 'Optional';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get serviceTypeId => 'Service Type ID';
+
+  @override
   String get services => 'E-Services';
 
   @override
   String get news => 'News';
 
   @override
+  String get newsDetails => 'News Details';
+
+  @override
+  String get serviceDetails => 'E-Services Details';
+
+  @override
+  String get viewArticle => 'View Full Article';
+
+  @override
   String get search => 'Search';
-
-  @override
-  String get deleteCourse => 'Delete Course';
-
-  @override
-  String get areYouSureCourse => 'Are you sure you want to delete this course?';
-
-  @override
-  String get delete => 'Delete';
-
-  @override
-  String get cancel => 'Cancel';
-
-  @override
-  String get name => 'name';
-
-  @override
-  String get phone => 'phone';
-
-  @override
-  String get age => 'age';
-
-  @override
-  String get city => 'city';
-
-  @override
-  String get batchNum => 'batch number';
-
-  @override
-  String get gender => 'Gender';
-
-  @override
-  String get male => 'Male';
-
-  @override
-  String get female => 'Female';
-
-  @override
-  String get work => 'Work';
-
-  @override
-  String get unWork => 'Not working';
-
-  @override
-  String get workStatus => 'Work Status';
-
-  @override
-  String get paymentMethod => 'Payment Method';
-
-  @override
-  String get cash => 'Cash';
-
-  @override
-  String get online => 'Online';
-
-  @override
-  String get selectState => 'Select state';
-
-  @override
-  String get selectStatus => 'Select status';
-
-  @override
-  String get selectHowKnow => 'Select how to know us';
-
-  @override
-  String get uploadImage => 'Upload Image';
-
-  @override
-  String get addNewCourse => 'Add New Course';
-
-  @override
-  String get addCourse => 'Add Course';
-
-  @override
-  String get deleteTask => 'Delete Task';
-
-  @override
-  String get areYouSureTask => 'Are you sure you want to delete this task?';
 
   @override
   String get description => 'Description';
 
   @override
-  String get selectUser => 'Select user';
+  String get govern => 'Government';
 
   @override
-  String get selectPartner => 'Select partner';
-
-  @override
-  String get selectProject => 'Select Project';
-
-  @override
-  String get addTask => 'Add Task';
-
-  @override
-  String get addNewTask => 'Add New Task';
-
-  @override
-  String get courseDetails => 'Course Details';
-
-  @override
-  String get taskDetails => 'Task Details';
-
-  @override
-  String get user => 'User';
-
-  @override
-  String get project => 'Project';
-
-  @override
-  String get partner => 'Partner';
+  String get selectGovern => 'Select Government';
 
   @override
   String get state => 'State';
 
   @override
-  String get status => 'Status';
+  String get selectState => 'Select state';
 
   @override
-  String get know => 'How to Know Us';
+  String get village => 'Village';
+
+  @override
+  String get selectVillage => 'Select Village';
+
+  @override
+  String get reference => 'Reference';
+
+  @override
+  String get fromDate => 'From Date';
+
+  @override
+  String get toDate => 'To Date';
+
+  @override
+  String get requiredDoc => 'Required Documents';
+
+  @override
+  String get uploadFile => 'Upload File';
+
+  @override
+  String get submitRequest => 'Submit Request';
+
+  @override
+  String get mainCat => 'Main Category';
+
+  @override
+  String get selectMainCat => 'Select Main Category';
+
+  @override
+  String get subCat => 'Sub Category';
+
+  @override
+  String get selectSubCat => 'Select Sub Category';
+
+  @override
+  String get serviceType => 'Service Type';
+
+  @override
+  String get selectServiceType => 'Select Service Type';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get addNewService => 'Add New Service';
+
+  @override
+  String get createManage => 'Create and manage new services';
+
+  @override
+  String get allServices => 'All Services';
+
+  @override
+  String get viewServices => 'View,edit,or delete services';
 }

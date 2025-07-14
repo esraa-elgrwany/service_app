@@ -9,6 +9,7 @@ import 'package:service_app/features/auth/presentation/view/sign_up_screen.dart'
 import 'package:service_app/features/auth/presentation/view/widgets/button.dart';
 import 'package:service_app/features/auth/presentation/view_model/auth_cubit.dart';
 import 'package:service_app/features/home/presentation/view/screens/home_screen.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 import '../../../../core/utils/styles/colors.dart';
 
@@ -53,7 +54,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     ),
                   ),
                   title: Text(
-                    "Verification",
+                    AppLocalizations.of(context)!.verification,
                     style: GoogleFonts.montserrat(
                       textStyle: TextStyle(
                           fontSize: 22.sp, fontWeight: FontWeight.w600),
@@ -86,7 +87,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        "Enter the OTP code sent to your number",
+                                        AppLocalizations.of(context)!.enterOtp,
                                         style: GoogleFonts.montserrat(
                                           textStyle: TextStyle(
                                               color: Theme.of(context)
@@ -263,7 +264,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                                   otp: code);
                                             },
                                             child: Button(
-                                              text: "Confirm",
+                                              text: AppLocalizations.of(context)!.confirm,
                                             ));
                                       },
                                     ),

@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:[
                           Text(
-                            "welcome",
+                            AppLocalizations.of(context)!.welcome,
                             style: TextStyle(
                                 fontSize: 22.sp, fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onSurface),
                           ),

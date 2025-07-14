@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/add_service/data/models/service_type_model.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 
 class ServiceTypeDialog extends StatefulWidget{
@@ -40,7 +41,7 @@ class _ServiceTypeDialogState extends State<ServiceTypeDialog> {
           )
               : */
           Text(
-            " Select Service Type",
+          AppLocalizations.of(context)!.selectServiceType,
             style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
           ),
           /*IconButton(

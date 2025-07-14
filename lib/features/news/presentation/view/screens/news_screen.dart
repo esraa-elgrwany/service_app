@@ -6,6 +6,7 @@ import 'package:service_app/features/home/presentation/view/widgets/search_bar.d
 import 'package:service_app/features/news/presentation/view/screens/news_details_screen.dart';
 import 'package:service_app/features/news/presentation/view/widgets/news_item.dart';
 import 'package:service_app/features/news/presentation/view_model/news_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 import '../widgets/category_item.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'News',
+            AppLocalizations.of(context)!.news,
             style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.w600, fontSize: 22.sp),
           ),

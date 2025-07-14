@@ -17,6 +17,7 @@ import 'package:service_app/features/service/add_service/presentation/view/widge
 import 'package:service_app/features/service/add_service/presentation/view/widgets/text_form_widget.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/village_dialog.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 import '../../../../../../core/cache/shared_preferences.dart';
 import '../../../data/models/get_fields_model.dart';
@@ -76,7 +77,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add New Service",
+          AppLocalizations.of(context)!.addNewService,
           style: GoogleFonts.montserrat(
             fontWeight: FontWeight.w600,
             fontSize: 22.sp,
@@ -125,7 +126,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   maxLine: 1,
                                   icon: Icons.person,
                                   readOnly: true,
-                                  validateTxt: "Required",
+                                  validateTxt: AppLocalizations.of(context)!.required,
                                 ),
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
@@ -134,25 +135,25 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   maxLine: 1,
                                   readOnly: true,
                                   icon: Icons.card_membership,
-                                  validateTxt: "Required",
+                                  validateTxt: AppLocalizations.of(context)!.required,
                                 ),
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
                                   controller: _phoneController,
                                   hint:_phoneController.text,
                                   icon: Icons.phone,
-                                  validateTxt: "Required",
+                                  validateTxt: AppLocalizations.of(context)!.required,
                                   maxLine: 1,
                                   readOnly: true,
                                 ),
                                 SizedBox(height: 16.h),
                                 TextFormWidget(
                                   controller: _descriptionController,
-                                  hint: "Description",
+                                  hint: AppLocalizations.of(context)!.description,
                                   maxLine: 3,
                                   readOnly: false,
                                   icon: Icons.description,
-                                  validateTxt: "Required",
+                                  validateTxt: AppLocalizations.of(context)!.required,
                                 ),
                                 SizedBox(height: 16.h),
                                 if (fields[1].status != "no")
@@ -162,7 +163,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                     child: DropDownContainer(
                                       text:
                                           selectedGovernment?.governmentName ??
-                                              "Government",
+                                              AppLocalizations.of(context)!.govern,
                                       isLocation: false,
                                     ),
                                   ),
@@ -172,7 +173,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   InkWell(
                                     onTap: () => _showStateSelectionDialog(),
                                     child: DropDownContainer(
-                                      text: selectedState?.stateName ?? "State",
+                                      text: selectedState?.stateName ?? AppLocalizations.of(context)!.state,
                                       isLocation: false,
                                     ),
                                   ),
@@ -183,7 +184,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                     onTap: () => _showVillageSelectionDialog(),
                                     child: DropDownContainer(
                                       text: selectedVillage?.villageName ??
-                                          "Village",
+                                          AppLocalizations.of(context)!.village,
                                       isLocation: false,
                                     ),
                                   ),
@@ -192,24 +193,24 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                 if (fields[3].status != "no")
                                   TextFormWidget(
                                     controller: referenceController,
-                                    hint: "Reference",
+                                    hint:AppLocalizations.of(context)!.reference,
                                     readOnly: false,
                                     maxLine: 1,
                                     icon: Icons.text_fields_rounded,
                                     validateTxt:
                                         (fields[3].status == "required")
-                                            ? "Required"
+                                            ? AppLocalizations.of(context)!.required
                                             : "",
                                   ),
                                 if (fields[3].status != "no")
                                   SizedBox(height: 16.h),
                                 if (fields[4].status != "no")
-                                  buildDatePickerField("From Date", fromDate,
+                                  buildDatePickerField(AppLocalizations.of(context)!.fromDate, fromDate,
                                       () => _selectFromDate(context)),
                                 if (fields[4].status != "no")
                                   SizedBox(height: 16.h),
                                 if (fields[5].status != "no")
-                                  buildDatePickerField("To Date", toDate,
+                                  buildDatePickerField(AppLocalizations.of(context)!.toDate, toDate,
                                       () => _selectToDate(context)),
                                 if (fields[5].status != "no")
                                   SizedBox(height: 16.h),
@@ -232,7 +233,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                       }
                                     },
                                     child: DropDownContainer(
-                                      text:locationAddress==null?"Location":locationAddress??"no location",
+                                      text:locationAddress==null?AppLocalizations.of(context)!.location:locationAddress??"no location",
                                       isLocation: true,
                                     ),
                                   ),
@@ -247,7 +248,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                     ),
                                     SizedBox(width: 8.w),
                                     Text(
-                                      "Required documents:",
+                                      AppLocalizations.of(context)!.requiredDoc,
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w600,
@@ -291,7 +292,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                   icon: Icon(Icons.upload_file,
                                       color: primaryColor),
                                   label: Text(
-                                    "Upload File",
+                                    AppLocalizations.of(context)!.uploadFile,
                                     style: GoogleFonts.montserrat(
                                       color: primaryColor,
                                       fontSize: 16.sp,
@@ -454,7 +455,7 @@ class _AddServiceSecondScreenState extends State<AddServiceSecondScreen> {
                                         ),
                                       ),
                                       child: Text(
-                                        "Submit Request",
+                                        AppLocalizations.of(context)!.submitRequest,
                                         style: GoogleFonts.montserrat(
                                           color: Colors.white,
                                           fontSize: 16.sp,

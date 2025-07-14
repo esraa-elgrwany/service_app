@@ -98,11 +98,65 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
-  /// No description provided for @login.
+  /// No description provided for @signIn.
   ///
   /// In en, this message translates to:
-  /// **'Login'**
-  String get login;
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @phoneNum.
+  ///
+  /// In en, this message translates to:
+  /// **'phone number'**
+  String get phoneNum;
+
+  /// No description provided for @phoneValid.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter your phone number'**
+  String get phoneValid;
+
+  /// No description provided for @sendVerCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Verification Code'**
+  String get sendVerCode;
+
+  /// No description provided for @enterCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter 8 digits without the country code..'**
+  String get enterCodeHint;
+
+  /// No description provided for @verification.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification'**
+  String get verification;
+
+  /// No description provided for @enterOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the OTP code sent to your number'**
+  String get enterOtp;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// No description provided for @createNewAcc.
+  ///
+  /// In en, this message translates to:
+  /// **'Create new account'**
+  String get createNewAcc;
 
   /// No description provided for @logout.
   ///
@@ -110,59 +164,77 @@ abstract class AppLocalizations {
   /// **'Log out'**
   String get logout;
 
-  /// No description provided for @hello.
-  ///
-  /// In en, this message translates to:
-  /// **'Hello user,'**
-  String get hello;
-
-  /// No description provided for @enterUserPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your username and password'**
-  String get enterUserPass;
-
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'welcome to our app'**
+  /// **'Welcome'**
   String get welcome;
 
-  /// No description provided for @passValid.
+  /// No description provided for @name.
   ///
   /// In en, this message translates to:
-  /// **'Please enter your password'**
-  String get passValid;
+  /// **'Name'**
+  String get name;
 
-  /// No description provided for @userName.
+  /// No description provided for @nameHint.
   ///
   /// In en, this message translates to:
-  /// **'Username'**
-  String get userName;
+  /// **'Name'**
+  String get nameHint;
 
-  /// No description provided for @password.
+  /// No description provided for @nameValid.
   ///
   /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
+  /// **'Please enter your username'**
+  String get nameValid;
 
-  /// No description provided for @usernameHint.
+  /// No description provided for @idNum.
   ///
   /// In en, this message translates to:
-  /// **'username'**
-  String get usernameHint;
+  /// **'ID number'**
+  String get idNum;
 
-  /// No description provided for @passHint.
+  /// No description provided for @idValid.
   ///
   /// In en, this message translates to:
-  /// **'password'**
-  String get passHint;
+  /// **'please enter your ID number'**
+  String get idValid;
 
-  /// No description provided for @userValid.
+  /// No description provided for @iDExpiryDate.
   ///
   /// In en, this message translates to:
-  /// **'Please enter your userName'**
-  String get userValid;
+  /// **'ID expiry date'**
+  String get iDExpiryDate;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @stage.
+  ///
+  /// In en, this message translates to:
+  /// **'Stage'**
+  String get stage;
+
+  /// No description provided for @addressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter your address'**
+  String get addressHint;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
 
   /// No description provided for @lang.
   ///
@@ -212,6 +284,30 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get setting;
 
+  /// No description provided for @mapBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Location On Map'**
+  String get mapBar;
+
+  /// No description provided for @optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @serviceTypeId.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Type ID'**
+  String get serviceTypeId;
+
   /// No description provided for @services.
   ///
   /// In en, this message translates to:
@@ -224,167 +320,29 @@ abstract class AppLocalizations {
   /// **'News'**
   String get news;
 
+  /// No description provided for @newsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'News Details'**
+  String get newsDetails;
+
+  /// No description provided for @serviceDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'E-Services Details'**
+  String get serviceDetails;
+
+  /// No description provided for @viewArticle.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full Article'**
+  String get viewArticle;
+
   /// No description provided for @search.
   ///
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
-
-  /// No description provided for @deleteCourse.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete Course'**
-  String get deleteCourse;
-
-  /// No description provided for @areYouSureCourse.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to delete this course?'**
-  String get areYouSureCourse;
-
-  /// No description provided for @delete.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete'**
-  String get delete;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// No description provided for @name.
-  ///
-  /// In en, this message translates to:
-  /// **'name'**
-  String get name;
-
-  /// No description provided for @phone.
-  ///
-  /// In en, this message translates to:
-  /// **'phone'**
-  String get phone;
-
-  /// No description provided for @age.
-  ///
-  /// In en, this message translates to:
-  /// **'age'**
-  String get age;
-
-  /// No description provided for @city.
-  ///
-  /// In en, this message translates to:
-  /// **'city'**
-  String get city;
-
-  /// No description provided for @batchNum.
-  ///
-  /// In en, this message translates to:
-  /// **'batch number'**
-  String get batchNum;
-
-  /// No description provided for @gender.
-  ///
-  /// In en, this message translates to:
-  /// **'Gender'**
-  String get gender;
-
-  /// No description provided for @male.
-  ///
-  /// In en, this message translates to:
-  /// **'Male'**
-  String get male;
-
-  /// No description provided for @female.
-  ///
-  /// In en, this message translates to:
-  /// **'Female'**
-  String get female;
-
-  /// No description provided for @work.
-  ///
-  /// In en, this message translates to:
-  /// **'Work'**
-  String get work;
-
-  /// No description provided for @unWork.
-  ///
-  /// In en, this message translates to:
-  /// **'Not working'**
-  String get unWork;
-
-  /// No description provided for @workStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Work Status'**
-  String get workStatus;
-
-  /// No description provided for @paymentMethod.
-  ///
-  /// In en, this message translates to:
-  /// **'Payment Method'**
-  String get paymentMethod;
-
-  /// No description provided for @cash.
-  ///
-  /// In en, this message translates to:
-  /// **'Cash'**
-  String get cash;
-
-  /// No description provided for @online.
-  ///
-  /// In en, this message translates to:
-  /// **'Online'**
-  String get online;
-
-  /// No description provided for @selectState.
-  ///
-  /// In en, this message translates to:
-  /// **'Select state'**
-  String get selectState;
-
-  /// No description provided for @selectStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Select status'**
-  String get selectStatus;
-
-  /// No description provided for @selectHowKnow.
-  ///
-  /// In en, this message translates to:
-  /// **'Select how to know us'**
-  String get selectHowKnow;
-
-  /// No description provided for @uploadImage.
-  ///
-  /// In en, this message translates to:
-  /// **'Upload Image'**
-  String get uploadImage;
-
-  /// No description provided for @addNewCourse.
-  ///
-  /// In en, this message translates to:
-  /// **'Add New Course'**
-  String get addNewCourse;
-
-  /// No description provided for @addCourse.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Course'**
-  String get addCourse;
-
-  /// No description provided for @deleteTask.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete Task'**
-  String get deleteTask;
-
-  /// No description provided for @areYouSureTask.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to delete this task?'**
-  String get areYouSureTask;
 
   /// No description provided for @description.
   ///
@@ -392,65 +350,17 @@ abstract class AppLocalizations {
   /// **'Description'**
   String get description;
 
-  /// No description provided for @selectUser.
+  /// No description provided for @govern.
   ///
   /// In en, this message translates to:
-  /// **'Select user'**
-  String get selectUser;
+  /// **'Government'**
+  String get govern;
 
-  /// No description provided for @selectPartner.
+  /// No description provided for @selectGovern.
   ///
   /// In en, this message translates to:
-  /// **'Select partner'**
-  String get selectPartner;
-
-  /// No description provided for @selectProject.
-  ///
-  /// In en, this message translates to:
-  /// **'Select Project'**
-  String get selectProject;
-
-  /// No description provided for @addTask.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Task'**
-  String get addTask;
-
-  /// No description provided for @addNewTask.
-  ///
-  /// In en, this message translates to:
-  /// **'Add New Task'**
-  String get addNewTask;
-
-  /// No description provided for @courseDetails.
-  ///
-  /// In en, this message translates to:
-  /// **'Course Details'**
-  String get courseDetails;
-
-  /// No description provided for @taskDetails.
-  ///
-  /// In en, this message translates to:
-  /// **'Task Details'**
-  String get taskDetails;
-
-  /// No description provided for @user.
-  ///
-  /// In en, this message translates to:
-  /// **'User'**
-  String get user;
-
-  /// No description provided for @project.
-  ///
-  /// In en, this message translates to:
-  /// **'Project'**
-  String get project;
-
-  /// No description provided for @partner.
-  ///
-  /// In en, this message translates to:
-  /// **'Partner'**
-  String get partner;
+  /// **'Select Government'**
+  String get selectGovern;
 
   /// No description provided for @state.
   ///
@@ -458,17 +368,125 @@ abstract class AppLocalizations {
   /// **'State'**
   String get state;
 
-  /// No description provided for @status.
+  /// No description provided for @selectState.
   ///
   /// In en, this message translates to:
-  /// **'Status'**
-  String get status;
+  /// **'Select state'**
+  String get selectState;
 
-  /// No description provided for @know.
+  /// No description provided for @village.
   ///
   /// In en, this message translates to:
-  /// **'How to Know Us'**
-  String get know;
+  /// **'Village'**
+  String get village;
+
+  /// No description provided for @selectVillage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Village'**
+  String get selectVillage;
+
+  /// No description provided for @reference.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get reference;
+
+  /// No description provided for @fromDate.
+  ///
+  /// In en, this message translates to:
+  /// **'From Date'**
+  String get fromDate;
+
+  /// No description provided for @toDate.
+  ///
+  /// In en, this message translates to:
+  /// **'To Date'**
+  String get toDate;
+
+  /// No description provided for @requiredDoc.
+  ///
+  /// In en, this message translates to:
+  /// **'Required Documents'**
+  String get requiredDoc;
+
+  /// No description provided for @uploadFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload File'**
+  String get uploadFile;
+
+  /// No description provided for @submitRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Request'**
+  String get submitRequest;
+
+  /// No description provided for @mainCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Main Category'**
+  String get mainCat;
+
+  /// No description provided for @selectMainCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Main Category'**
+  String get selectMainCat;
+
+  /// No description provided for @subCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Sub Category'**
+  String get subCat;
+
+  /// No description provided for @selectSubCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Sub Category'**
+  String get selectSubCat;
+
+  /// No description provided for @serviceType.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Type'**
+  String get serviceType;
+
+  /// No description provided for @selectServiceType.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Service Type'**
+  String get selectServiceType;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @addNewService.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Service'**
+  String get addNewService;
+
+  /// No description provided for @createManage.
+  ///
+  /// In en, this message translates to:
+  /// **'Create and manage new services'**
+  String get createManage;
+
+  /// No description provided for @allServices.
+  ///
+  /// In en, this message translates to:
+  /// **'All Services'**
+  String get allServices;
+
+  /// No description provided for @viewServices.
+  ///
+  /// In en, this message translates to:
+  /// **'View,edit,or delete services'**
+  String get viewServices;
 }
 
 class _AppLocalizationsDelegate

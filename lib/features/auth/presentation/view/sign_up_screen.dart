@@ -7,6 +7,7 @@ import 'package:service_app/core/cache/shared_preferences.dart';
 import 'package:service_app/features/auth/presentation/view/widgets/header.dart';
 import 'package:service_app/features/auth/presentation/view_model/auth_cubit.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/text_form_widget.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 import '../../../../core/utils/styles/colors.dart';
 import '../../../home/presentation/view/screens/home_screen.dart';
 
@@ -62,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Header("Sign up", "Create new account"),
+                          Header(AppLocalizations.of(context)!.signUp, AppLocalizations.of(context)!.createNewAcc),
                           SizedBox(height: 20.h),
                           Form(
                             key: formKey,
@@ -72,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               children: [
                                 SizedBox(height: 20.h),
                                 Text(
-                                  "Phone number",
+                                  AppLocalizations.of(context)!.phoneNum,
                                   style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
                                         color: Theme.of(context)
@@ -92,8 +93,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     readOnly: true,
                                     maxLine: 1,
                                     validateTxt:
-                                        "please enter your phone number"),
-                                Text("name",
+                                    AppLocalizations.of(context)!.phoneValid),
+                                Text(AppLocalizations.of(context)!.name,
                                     style: GoogleFonts.montserrat(
                                       textStyle: TextStyle(
                                           color: Theme.of(context)
@@ -105,13 +106,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 SizedBox(height: 8.h),
                                 TextFormWidget(
                                     controller: userController,
-                                    hint: "name",
+                                    hint: AppLocalizations.of(context)!.nameHint,
                                     icon: Icons.person,
                                     readOnly: false,
                                     maxLine: 1,
-                                    validateTxt: "please enter your username"),
+                                    validateTxt: AppLocalizations.of(context)!.nameValid),
                                 SizedBox(height: 16.h),
-                                Text("ID number",
+                                Text(AppLocalizations.of(context)!.idNum,
                                     style: GoogleFonts.montserrat(
                                       textStyle: TextStyle(
                                           color: Theme.of(context)
@@ -123,12 +124,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 SizedBox(height: 8.h),
                                 TextFormWidget(
                                     controller: idController,
-                                    hint: "id number",
+                                    hint: AppLocalizations.of(context)!.idNum,
                                     icon: Icons.numbers,readOnly:false,
                                     maxLine: 1,
-                                    validateTxt: "please enter your id number"),
+                                    validateTxt: AppLocalizations.of(context)!.idValid),
                                 SizedBox(height: 16.h),
-                                Text("ID expiry date",
+                                Text(AppLocalizations.of(context)!.iDExpiryDate,
                                     style: GoogleFonts.montserrat(
                                       textStyle: TextStyle(
                                           color: Theme.of(context)
@@ -157,13 +158,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       child: TextFormWidget(
                                         readOnly: false,
                                           controller: dateController,
-                                          hint: 'id expiry date',
-                                          validateTxt: "required",
+                                          hint: AppLocalizations.of(context)!.iDExpiryDate,
+                                          validateTxt: AppLocalizations.of(context)!.required,
                                           maxLine: 1,
                                           icon: Icons.date_range_outlined)),
                                 ),
                                 SizedBox(height: 16.h),
-                                Text("address",
+                                Text(AppLocalizations.of(context)!.address,
                                     style: GoogleFonts.montserrat(
                                       textStyle: TextStyle(
                                           color: Theme.of(context)
@@ -175,11 +176,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 SizedBox(height: 8.h),
                                 TextFormWidget(
                                     controller: addressController,
-                                    hint: "address",
+                                    hint: AppLocalizations.of(context)!.address,
                                     icon: Icons.location_on_outlined,
                                     readOnly: false,
                                     maxLine: 1,
-                                    validateTxt: "please enter your address"),
+                                    validateTxt: AppLocalizations.of(context)!.addressHint),
                                 SizedBox(height: 30.h),
                                 BlocConsumer<AuthCubit, AuthState>(
                                   listener: (context, state) {
@@ -290,7 +291,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               }
                                             },
                                             child: Text(
-                                              "Sign up",
+                                              AppLocalizations.of(context)!.signUp,
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 20.sp,

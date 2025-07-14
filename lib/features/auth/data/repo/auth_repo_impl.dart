@@ -34,33 +34,38 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failures, VerifyOtpSuccessModel>> verifyOtp(
-      {required String phone, required String otp}) async {
+  Future<Either<Failures, VerifyOtpSuccessModel>> verifyOtp({
+    required String phone,
+    required String otp,
+  }) async {
     try {
       final response = await apiManager.postData(
         EndPoints.verifyOtp,
         body: {"phone": phone, "otp": otp},
       );
-      VerifyOtpSuccessModel model =
-          VerifyOtpSuccessModel.fromJson(response.data);
-      print("Response Data: ${response.data}");
-      return Right(model);
-    } on DioException catch (e) {
-      final responseData = e.response?.data;
-      final statusCode = e.response?.statusCode;
 
-      if (statusCode == 401 &&
-          responseData is Map &&
-          responseData['message'] != null) {
-        final message = responseData['message'];
-        return Left(ServerFailure(message)); // "Signup required"
+      if (response.statusCode == 200) {
+        final model = VerifyOtpSuccessModel.fromJson(response.data);
+        return Right(model);
       }
 
-      return Left(ServerFailure(e.message ?? "Failed to verify OTP"));
+      final message = response.data is Map && response.data['message'] != null
+          ? response.data['message'] as String
+          : 'Failed to verify OTP (code ${response.statusCode})';
+print("status code${response.statusCode}");
+      return Left(ServerFailure(message));
+    } on DioException catch (e) {
+      final responseData = e.response?.data;
+      final message =
+      responseData is Map && responseData['message'] != null
+          ? responseData['message']
+          : e.message ?? 'Failed to verify OTP';
+      return Left(ServerFailure(message));
     } catch (_) {
-      return Left(ServerFailure("Something went wrong"));
+      return Left(ServerFailure('Something went wrong'));
     }
   }
+
 
   @override
   Future<Either<Failures, SignUpSuccessModel>>? register(

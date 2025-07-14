@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:service_app/features/service/get_service/presentation/view_model/get_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/models/service_details_model.dart';
 
@@ -20,7 +21,7 @@ class ServiceDetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'E-Services Details',
+            AppLocalizations.of(context)!.serviceDetails,
             style: GoogleFonts.montserrat(
               fontWeight: FontWeight.w600,
               fontSize: 22.sp,
@@ -47,15 +48,15 @@ class ServiceDetailsScreen extends StatelessWidget {
                   [];
 
               final staticFields = {
-                'Name': service?.name,
-                'Phone': service?.phone,
-                'Date': service?.date,
-                'National ID': service?.nationalId,
-                'Stage': service?.stage,
-                'Category': service?.category,
-                'Subcategory': service?.subCategory,
-                'Service Type': service?.serviceType,
-                'Service Type ID': service?.serviceTypeId.toString(),
+                AppLocalizations.of(context)!.name: service?.name,
+                AppLocalizations.of(context)!.phoneNum: service?.phone,
+                AppLocalizations.of(context)!.date: service?.date,
+                AppLocalizations.of(context)!.idNum: service?.nationalId,
+                AppLocalizations.of(context)!.stage: service?.stage,
+                AppLocalizations.of(context)!.mainCat: service?.category,
+                AppLocalizations.of(context)!.subCat: service?.subCategory,
+                AppLocalizations.of(context)!.serviceType: service?.serviceType,
+                AppLocalizations.of(context)!.serviceTypeId: service?.serviceTypeId.toString(),
                 //'Partner': service?.partner,
               };
 
@@ -79,7 +80,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                         final field = fields[index - staticFields.length];
                         final label = field.label ?? field.name ?? '—';
                         final value = _getServiceValue(service!, field.name ?? '—');
-                        final optionalSuffix = field.status == 'optional' ? " (optional)" : "";
+                        final optionalSuffix = field.status == 'optional' ? " (${AppLocalizations.of(context)!.optional})" : "";
                         return _buildDetailItem(context, "$label$optionalSuffix", value);
                       }
                     },

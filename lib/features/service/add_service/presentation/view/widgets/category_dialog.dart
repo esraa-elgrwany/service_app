@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:service_app/features/service/add_service/data/models/category_model.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class CategoryDialog extends StatefulWidget{
   final Function(CategoryResult category) onCategorySelected;
@@ -39,7 +40,7 @@ class _CategoryDialogState extends State<CategoryDialog> {
           )
               : */
           Text(
-           " Select Category",
+            AppLocalizations.of(context)!.selectMainCat,
             style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
           ),
           /*IconButton(

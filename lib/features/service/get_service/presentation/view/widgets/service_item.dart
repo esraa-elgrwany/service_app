@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:service_app/core/utils/styles/colors.dart';
 import 'package:service_app/features/service/get_service/presentation/view_model/get_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class ServiceItem extends StatelessWidget{
   int index;
@@ -47,7 +48,7 @@ class ServiceItem extends StatelessWidget{
              SizedBox(height: 8.h),
             Row(
               children: [
-                Text("Reference:", style: TextStyle(fontSize: 16.sp)),
+                Text("${AppLocalizations.of(context)!.reference}:", style: TextStyle(fontSize: 16.sp)),
                 Flexible(
                   flex:8,
                     child: Text(services[index].reference??"no reference",
@@ -69,7 +70,7 @@ class ServiceItem extends StatelessWidget{
               children: [
                 Image.asset("assets/images/categories_6521775.png",width:24.w,height: 24.h,),
                 SizedBox(width: 6.w),
-                Text("Category:", style: TextStyle(fontSize: 16.sp)),
+                Text("${AppLocalizations.of(context)!.mainCat}:", style: TextStyle(fontSize: 16.sp)),
                 Text(services[index].category?.name??"no category"),
               ],
             ),
@@ -78,14 +79,14 @@ class ServiceItem extends StatelessWidget{
               children: [
                 Image.asset("assets/images/list_18542777.png",width:24.w,height: 24.h,),
                  SizedBox(width: 6.w),
-                Text("Sub Category:", style: TextStyle(fontSize: 16.sp)),
+                Text("${AppLocalizations.of(context)!.subCat}:", style: TextStyle(fontSize: 16.sp)),
                 Text(services[index].subCategory?.name??"no Sub category"),
               ],
             ),
              SizedBox(height: 8.h), // Status
             Row(
               children: [
-                Text("Stage:", style: TextStyle(
+                Text("${AppLocalizations.of(context)!.stage}:", style: TextStyle(
                   color:Colors.green.withOpacity(.8) ,
                   fontWeight: FontWeight.w600,
                     fontSize: 16.sp

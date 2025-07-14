@@ -6,6 +6,7 @@ import 'package:service_app/features/home/presentation/view/widgets/search_bar.d
 import 'package:service_app/features/service/get_service/presentation/view/screens/service_details_screen.dart';
 import 'package:service_app/features/service/get_service/presentation/view/widgets/service_item.dart';
 import 'package:service_app/features/service/get_service/presentation/view_model/get_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class ViewServiceScreen extends StatefulWidget {
   static const String routeName = "viewServiceScreen";
@@ -24,7 +25,7 @@ class _ViewServiceScreenState extends State<ViewServiceScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "All Services",
+          AppLocalizations.of(context)!.allServices,
           style: GoogleFonts.montserrat(
               fontWeight: FontWeight.w600, fontSize: 22.sp),
         ),

@@ -7,6 +7,7 @@ import 'package:service_app/core/utils/styles/colors.dart';
 import 'package:service_app/features/auth/presentation/view/verification_screen.dart';
 import 'package:service_app/features/auth/presentation/view_model/auth_cubit.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/text_form_num.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class PhoneNumScreen extends StatefulWidget {
   static const String routeName = "phoneNumScreen";
@@ -36,7 +37,7 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                   centerTitle: true,
                   surfaceTintColor: Colors.transparent,
                   title: Text(
-                    "Sign In",
+                    AppLocalizations.of(context)!.signIn,
                     style: GoogleFonts.montserrat(
                       textStyle: TextStyle(
                           fontSize: 22.sp, fontWeight: FontWeight.w600),
@@ -69,7 +70,7 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                                   Row(
                                     children: [
                                       Text(
-                                        "Phone number",
+                                        AppLocalizations.of(context)!.phoneNum,
                                         style: GoogleFonts.montserrat(
                                           textStyle: TextStyle(
                                               color: Theme.of(context)
@@ -86,15 +87,15 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                                   ),
                                   TextFormNum(
                                       controller: phoneController,
-                                      hint: "phone number",
+                                      hint: AppLocalizations.of(context)!.phoneNum,
                                       icon: Icons.call,
                                       validateTxt:
-                                          "please enter your phone number"),
+                                      AppLocalizations.of(context)!.phoneValid),
                                   SizedBox(
                                     height:16.h,
                                   ),
                                   Text(
-                                    "Enter 8 digits without the country code..",
+                                    AppLocalizations.of(context)!.enterCodeHint,
                                     style: GoogleFonts.montserrat(
                                       textStyle: TextStyle(
                                           color: Colors.grey,
@@ -178,7 +179,7 @@ class _PhoneNumScreenState extends State<PhoneNumScreen> {
                                                }
                                               },
                                               child: Text(
-                                                "Send Verification Code",
+                                                AppLocalizations.of(context)!.sendVerCode,
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16.sp,

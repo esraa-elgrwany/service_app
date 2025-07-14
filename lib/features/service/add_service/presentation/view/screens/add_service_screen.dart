@@ -12,6 +12,7 @@ import 'package:service_app/features/service/add_service/presentation/view/widge
 import 'package:service_app/features/service/add_service/presentation/view/widgets/service_type_dialog.dart';
 import 'package:service_app/features/service/add_service/presentation/view/widgets/sub_category_dialog.dart';
 import 'package:service_app/features/service/add_service/presentation/view_model/add_service_cubit.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class AddServiceScreen extends StatefulWidget {
   static const String routeName = "addServiceScreen";
@@ -38,7 +39,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Add New Service",
+            AppLocalizations.of(context)!.addNewService,
             style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.w600, fontSize: 22.sp),
           ),
@@ -67,7 +68,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             },
                             child: DropDownContainer(
                                 text:
-                                    selectedCategory?.name ?? "Main Category",
+                                    selectedCategory?.name ?? AppLocalizations.of(context)!.mainCat,
                               isLocation: false,)),
                         SizedBox(height: 16.h),
                         InkWell(
@@ -76,7 +77,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             },
                             child: DropDownContainer(
                                 text: selectedSubCategory?.name ??
-                                    "Sub Category",isLocation: false,)),
+                                    AppLocalizations.of(context)!.subCat,isLocation: false,)),
                         SizedBox(height: 16.h),
                         InkWell(
                             onTap: () {
@@ -84,7 +85,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             },
                             child: DropDownContainer(
                                 text: selectedServiceType?.name ??
-                                    "Service Type",isLocation: false,)),
+                                    AppLocalizations.of(context)!.serviceType,isLocation: false,)),
                         SizedBox(height: 16.h),
                         ElevatedButton(
                           onPressed: () {
@@ -97,7 +98,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)),
                           ),
-                          child: Text("Next",
+                          child: Text(AppLocalizations.of(context)!.next,
                               style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: 16.sp,

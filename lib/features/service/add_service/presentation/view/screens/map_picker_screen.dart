@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:service_app/l10n/app_localizations.dart';
 
 class MapPickerScreen extends StatefulWidget {
   static const String routeName="mapPicker";
@@ -43,7 +44,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Select Location on Map",style: TextStyle(
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.mapBar,style: TextStyle(
         fontSize: 22.sp,fontWeight: FontWeight.w600
       ),)),
       body: FlutterMap(
@@ -80,8 +81,8 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
             borderRadius: BorderRadius.circular(12),color: Colors.green
           ),
           child: Center(
-            child: Text("Confirm",style: TextStyle(
-              fontSize: 18.sp,fontWeight: FontWeight.w600
+            child: Text(AppLocalizations.of(context)!.confirm,style: TextStyle(
+              fontSize: 18.sp,fontWeight: FontWeight.w600,color: Colors.white
             ),),
           ),
         ),
